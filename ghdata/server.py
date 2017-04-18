@@ -407,6 +407,10 @@ app.route('/{}/<owner>/<repo>/commits/locations'.format(GHDATA_API_VERSION))(fla
                     ]
 """
 app.route('/{}/<owner>/<repo>/linking_websites'.format(GHDATA_API_VERSION))(flaskify(app, publicwww.linking_websites))
+#Jordan's Endpoint
+app.route('/{}/<owner>/<repo>/Contibutor_Breadth'.format(GHDATA_API_VERSION))(basic_endpoint(app, 'Contributor_Breadth'))
+#Zandria's Endpoint
+app.route('/{}/<owner>/<repo>/dist_work'.format(GHDATA_API_VERSION))(basic_endpoint(app, 'dist_work'))
 
 
 if (DEBUG):

@@ -103,6 +103,44 @@ GHDataReport.prototype.buildReport = function () {
         target: '#pulls-over-time'
       });
     });
+	
+	//Our code begins here!!! 
+	//Distribution of Work
+	this.api.distributionWork().then(function (distributionWork) {
+        console.log(distributionWork)
+     
+      
+	   MG.data_graphic({
+    	  title: "Avg Commits/Project",
+    	  data: MG.convert.date(distributionWork, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+    	  chart_type: 'point',
+    	  least_squares: true,
+    	  full_width: true,
+    	  height: 300,
+    	  color_range: ['#aaa'],
+    	  x_accessor: 'commits',
+    	  y_accessor: 'project',
+    	  target: '#distribution-over-time'
+     });
+   });
+       
+	//Community Activity
+	this.api.communityActivity().then(function (communityActivity) {
+      console.log(communityActivity)
+	  
+	  MG.data_graphic({
+        title: "Community Activity/Week",
+        data: MG.convert.date(communityActivity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        chart_type: 'point',
+        least_squares: true,
+        full_width: true,
+        height: 300,
+        color_range: ['#aaa'],
+        x_accessor: 'date',
+        y_accessor: 'activity',
+        target: '#communityActivity-over-time'
+      });
+    });
   }
 };
 

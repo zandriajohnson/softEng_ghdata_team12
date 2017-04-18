@@ -327,3 +327,37 @@ class GHTorrent(object):
         """)
 
         return pd.read_sql(pullAcceptanceSQL, self.db, params={"repoid": str(repoid)})
+
+        def dist_work(self, repoid):
+    	    distWorkSQL = s.sql.text("""
+                 select avg(num_users) as average_num_users, project_name, url, numcommits
+                 from
+    	           (
+    	              select projects.id as project_id, projects.name as project_name,
+    			          projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
+    			          count(users.id) as num_users
+    		            from commits
+    			          join project_commits on commits.id = project_commits.project_id
+    			          join projects on projects.id = project_commits.project_id
+    			          join users on commits.author_id = users.id
+    	              group by projects.id, commits.author_id
+    	            ) as user_count
+                  group by project_id
+              """)
+
+    	    return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
+
+        def community_activity(self, repoid):
+            """
+            Tallies up different forms of participation or engagement
+            """
+
+            communityActivitySQL = s.sql.text("""
+                SELECT DATE(select project_commits.project_id as project_id, commits.author_id
+                as author_id, count(project_commits.commit_id) as num_commits from commits
+                join project_commits on commits.id = project_commits.commit_id
+                join projects on projects.id = project_commits.project_id
+                group by project_id, author_id
+            """)
+
+            return pd.read_sql(communityActivitySQL, self.db, params={"repoid:" str(repoid)})
