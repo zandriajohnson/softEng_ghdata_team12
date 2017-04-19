@@ -107,7 +107,7 @@ GHDataReport.prototype.buildReport = function () {
 	//Our code begins here!!! 
 	//Distribution of Work
 	this.api.distributionWork().then(function (dist_work) {
-        console.log(distributionWork)
+        console.log(distributionWork);
      
       
 	   MG.data_graphic({
@@ -126,7 +126,7 @@ GHDataReport.prototype.buildReport = function () {
        
 	//Community Activity
 	this.api.communityActivity().then(function (communityActivity) {
-      console.log(communityActivity)
+      console.log(communityActivity);
 	  
 	  MG.data_graphic({
         title: "Community Activity/Week",
@@ -141,6 +141,22 @@ GHDataReport.prototype.buildReport = function () {
         target: '#communityActivity-over-time'
       });
     });
+	
+	// Contributor Breadth
+	this.api.contributorBreadth().then(function (contributorBreadth) {
+			console.log(contributorBreadth);
+			MG.data_graphic({
+			title: "Core/Non-Core Contributors,
+			data: MG.convert.date(conributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+			chart_type: 'point',
+			least_squares: true,
+			full_width: true,
+			height: 300,
+			color_range: ['#aaa'],
+			x_accessor: 'date',
+			y_accessor: 'watchers',
+			target: '#Contributors-over-time'
+	});
   }
 };
 
