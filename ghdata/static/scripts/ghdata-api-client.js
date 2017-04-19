@@ -170,10 +170,12 @@ GHDataAPIClient.prototype.contributors = function (params) {
  */
 GHDataAPIClient.prototype.committerLocations = function (params) {
   return this.get('commits/locations', params);
+};
 
 //Our code begins here  
 GHDataAPIClient.prototype.distributionWork = function (params) {
-	return this.get('dist_work', params)};
+	return this.get('dist_work', params);
+};
 
 GHDataAPIClient.prototype.communityActivity = function (params){
 	return this.get('timeseries/community_activity', params);

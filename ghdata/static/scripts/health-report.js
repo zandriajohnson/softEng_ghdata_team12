@@ -106,7 +106,7 @@ GHDataReport.prototype.buildReport = function () {
 	
 	//Our code begins here!!! 
 	//Distribution of Work
-	this.api.distributionWork().then(function (distributionWork) {
+	this.api.distributionWork().then(function (dist_work) {
         console.log(distributionWork)
      
       
