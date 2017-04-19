@@ -376,4 +376,4 @@ class GHTorrent(object):
 					(select repo_id, user_id from project_members)
 				group by projects.id
 				""")
-            return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid:" str(repoid)})
+            return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
