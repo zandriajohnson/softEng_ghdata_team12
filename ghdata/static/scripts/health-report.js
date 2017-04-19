@@ -125,7 +125,7 @@ GHDataReport.prototype.buildReport = function () {
    });
        
 	//Community Activity
-	this.api.communityActivity().then(function (communityActivity) {
+	this.api.communityActivity().then(function (community_activity) {
       console.log(communityActivity);
 	  
 	  MG.data_graphic({
@@ -143,7 +143,7 @@ GHDataReport.prototype.buildReport = function () {
     });
 	
 	// Contributor Breadth
-	this.api.contributorBreadth().then(function (contributorBreadth) {
+	this.api.contributorBreadth().then(function (Contributor_Breadth) {
 			console.log(contributorBreadth);
 			MG.data_graphic({
 			title: "Core/Non-Core Contributors,
