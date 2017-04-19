@@ -360,7 +360,7 @@ class GHTorrent(object):
                 group by project_id, author_id
             """)
 
-            return pd.read_sql(communityActivitySQL, self.db, params={"repoid:" str(repoid)})
+            return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
         def Contributor_Breadth(self, repoid):
         """
