@@ -241,14 +241,14 @@ class GHTorrent(object):
         """
 
         if (userid is not None and len(userid) > 0):
-		rawContributionsSQL = rawContributionsSQL.replace('[[', '')
-		rawContributionsSQL = rawContributionsSQL.replace(']]', '')
-                parameterized = s.sql.text(rawContributionsSQL)
-                return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid), "userid": str(userid)})
+            rawContributionsSQL = rawContributionsSQL.replace('[[', '')
+            rawContributionsSQL = rawContributionsSQL.replace(']]', '')
+            parameterized = s.sql.text(rawContributionsSQL)
+            return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid), "userid": str(userid)})
         else:
-                rawContributionsSQL = re.sub(r'\[\[.+?\]\]', '', rawContributionsSQL)
-                parameterized = s.sql.text(rawContributionsSQL)
-                return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid)})
+            rawContributionsSQL = re.sub(r'\[\[.+?\]\]', '', rawContributionsSQL)
+            parameterized = s.sql.text(rawContributionsSQL)
+            return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid)})
 
 
     def committer_locations(self, repoid):
