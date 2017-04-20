@@ -241,14 +241,15 @@ class GHTorrent(object):
         """
 
         if (userid is not None and len(userid) > 0):
-            rawContributionsSQL = rawContributionsSQL.replace('[[', '')
-            rawContributionsSQL = rawContributionsSQL.replace(']]', '')
-            parameterized = s.sql.text(rawContributionsSQL)
-            return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid), "userid": str(userid)})
+		rawContributionsSQL = rawContributionsSQL.replace('[[', '')
+		rawContributionsSQL = rawContributionsSQL.replace(']]', '')
+                parameterized = s.sql.text(rawContributionsSQL)
+                return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid), "userid": str(userid)})
         else:
-            rawContributionsSQL = re.sub(r'\[\[.+?\]\]', '', rawContributionsSQL)
-            parameterized = s.sql.text(rawContributionsSQL)
-            return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid)})
+                rawContributionsSQL = re.sub(r'\[\[.+?\]\]', '', rawContributionsSQL)
+                parameterized = s.sql.text(rawContributionsSQL)
+                return pd.read_sql(parameterized, self.db, params={"repoid": str(repoid)})
+
 
     def committer_locations(self, repoid):
         """
@@ -328,52 +329,52 @@ class GHTorrent(object):
 
         return pd.read_sql(pullAcceptanceSQL, self.db, params={"repoid": str(repoid)})
 
-        def dist_work(self, repoid):
-    	    distWorkSQL = s.sql.text("""
-                SELECT avg(num_users) as average_num_users, project_name, url, numcommits
-                From
-    	        (
-    	        select projects.id as project_id, projects.name as project_name,
-    	        projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
-    		    count(users.id) as num_users
-    	        from commits
-    		    join project_commits on commits.id = project_commits.project_id
-                join projects on projects.id = project_commits.project_id
-                join users on commits.author_id = users.id
-    	        group by projects.id, commits.author_id
-    	        ) as user_count
-                group by project_id
-              """)
+    def dist_work(self, repoid):
+    	distWorkSQL = s.sql.text("""
+                
+	SELECT avg(num_users) as average_num_users, project_name, url, numcommits
+        FROM
+    	    (SELECT projects.id as project_id, projects.name as project_name,
+    	    projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
+            count(users.id) as num_users
+    	    FROM commits
+            JOIN project_commits on commits.id = project_commits.project_id
+            join projects on projects.id = project_commits.project_id
+            join users on commits.author_id = users.id
+    	    group by projects.id, commits.author_id
+    	    ) as user_count
+            group by project_id
+        """)
 
-    	    return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
+    	return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
 
-        def community_activity(self, repoid):
-            """
+    def community_activity(self, repoid):
+        """
             Tallies up different forms of participation or engagement
-            """
+        """
 
-            communityActivitySQL = s.sql.text("""
-                SELECT DATE(select project_commits.project_id as project_id, commits.author_id
-                as author_id, count(project_commits.commit_id) as num_commits from commits
-                join project_commits on commits.id = project_commits.commit_id
-                join projects on projects.id = project_commits.project_id
-                group by project_id, author_id
-            """)
+        communityActivitySQL = s.sql.text("""
+        SELECT DATE(select project_commits.project_id as project_id, commits.author_id
+        as author_id, count(project_commits.commit_id) as num_commits from commits
+        join project_commits on commits.id = project_commits.commit_id
+        join projects on projects.id = project_commits.project_id
+        group by project_id, author_id
+        """)
 
-            return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
+        return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
-        def Contributor_Breadth(self, repoid):
+    def Contributor_Breadth(self, repoid):
         """
         Determines Number of Non-Project Member commits
         """
-            contributorBreadthSQL = s.sql.text("""
-        	    SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
-				from
-				commits
-				join projects on commits.project_id = projects.id
-				join users on users.id = commits.author_id
-				where (projects.id, users.id) not in
-					(select repo_id, user_id from project_members)
-				group by projects.id
-				""")
-            return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
+        contributorBreadthSQL = s.sql.text("""
+	SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
+	from
+	commits
+	join projects on commits.project_id = projects.id
+	join users on users.id = commits.author_id
+	where (projects.id, users.id) not in
+	(select repo_id, user_id from project_members)
+	group by projects.id
+	""")
+	return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
