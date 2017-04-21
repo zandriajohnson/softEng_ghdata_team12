@@ -355,9 +355,15 @@ class GHTorrent(object):
     #Adam's Metric for SPRINT 2    
     def contributor_diversity(self, repoid):
         contributorDiversitySQL = s.sql.text("""
-            SELECT date(pull_request_history.created_at) as "contributor_diversity"
-            FROM pull_request_history
-            WHERE projects.id = :repoid
+        SELECT count(distinct org_id) as num_organizations, projects.name as project_name, url
+        From
+	    organization_members
+        join users on organization_members.user_id = users.id
+        join pull_request_history on pull_request_history.actor_id = users.id
+        join pull_requests on pull_request_history.pull_request_id = pull_requests.id
+        join projects on pull_requests.base_repo_id = projects.id
+        where pull_request_history.action = 'opened'
+        group by projects.id
         """)
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
