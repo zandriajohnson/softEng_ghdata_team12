@@ -106,20 +106,20 @@ GHDataReport.prototype.buildReport = function () {
 	
 	//Our code begins here!!! 
 	//Distribution of Work
-	this.api.distributionWork().then(function (dist_work) {
-        console.log(distributionWork)
+	this.api.dist_work().then(function (dist_work) {
+        console.log(dist_work)
      
       
 	   MG.data_graphic({
-    	  title: "Avg Commits/Project",
-    	  data: MG.convert.date(distributionWork, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+    	  title: "Commits/Project",
+    	  data: data,
     	  chart_type: 'point',
     	  least_squares: true,
     	  full_width: true,
     	  height: 300,
     	  color_range: ['#aaa'],
-    	  x_accessor: 'commits',
-    	  y_accessor: 'project',
+    	  x_accessor: 'project name',
+    	  y_accessor: 'commits',
     	  target: '#distribution-over-time'
      });
    });
