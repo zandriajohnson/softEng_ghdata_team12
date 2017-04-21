@@ -132,7 +132,7 @@ GHDataReport.prototype.buildReport = function () {
       height: 300,
       color_range: ['#aaa'],
       x_accessor: 'date',
-      y_accessor: 'reopened issues',
+      y_accessor: 'reopenedissues',
       target: '#reopenedissues-over-time'
     });
   });
