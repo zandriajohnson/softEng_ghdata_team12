@@ -180,3 +180,7 @@ GHDataAPIClient.prototype.distributionWork = function (params) {
 GHDataAPIClient.prototype.communityActivity = function (params){
 	return this.get('timeseries/community_activity', params);
 };
+
+GHDataAPIClient.prototype.reopened_issues = function (params) {
+  return this.get('timeseries/reopened_issues', params);
+};
