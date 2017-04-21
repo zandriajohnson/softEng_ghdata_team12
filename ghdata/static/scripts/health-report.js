@@ -107,7 +107,7 @@ GHDataReport.prototype.buildReport = function () {
 	//Our code begins here!!! 
 	//Distribution of Work
 
-	this.api.dist_work().then(function (dist_work) {
+	/*this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
     	  title: "Commits/Project",
     	  data: data,
@@ -120,7 +120,7 @@ GHDataReport.prototype.buildReport = function () {
     	  y_accessor: 'commits',
     	  target: '#distribution-over-time'
      });
-   });
+   });*/
     
    this.api.reopened_issues().then(function (reopened_issues) {
      MG.data_graphic({
