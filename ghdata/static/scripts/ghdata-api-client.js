@@ -173,7 +173,7 @@ GHDataAPIClient.prototype.committerLocations = function (params) {
 };
 
 //Our code begins here  
-GHDataAPIClient.prototype.distributionWork = function (params) {
+GHDataAPIClient.prototype.dist_work = function (params) {
 	return this.get('dist_work', params);
 };
 

@@ -326,7 +326,7 @@ class GHTorrent(object):
         """
 
         communityActivitySQL = s.sql.text("""
-        SELECT DATE(select project_commits.project_id as project_id, commits.author_id
+        select project_commits.project_id as project_id, commits.author_id
         as author_id, count(project_commits.commit_id) as num_commits from commits
         join project_commits on commits.id = project_commits.commit_id
         join projects on projects.id = project_commits.project_id
