@@ -290,24 +290,35 @@ class GHTorrent(object):
 
         return pd.read_sql(pullAcceptanceSQL, self.db, params={"repoid": str(repoid)})
 
+#Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
-        distWorkSQL = s.sql.text("""
+    	    distWorkSQL = s.sql.text("""
+                 select avg(num_users) as average_num_users, project_name as 'project name', url, numcommits as 'commits'
+                 from
+    	           (
+    	              select projects.id as project_id, projects.name as project_name,
+    			          projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
+    			          count(users.id) as num_users
+    		            from commits
+    			          join project_commits on commits.id = project_commits.project_id
+    			          join projects on projects.id = project_commits.project_id
+    			          join users on commits.author_id = users.id
+    	              group by projects.id, commits.author_id
+    	            ) as user_count
+                  group by project_id
+              """)
 
-	SELECT avg(num_users) as average_num_users, project_name, url, numcommits
-        FROM
-    	    (SELECT projects.id as project_id, projects.name as project_name,
-    	    projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
-            count(users.id) as num_users
-    	    FROM commits
-            JOIN project_commits on commits.id = project_commits.project_id
-            join projects on projects.id = project_commits.project_id
-            join users on commits.author_id = users.id
-    	    group by projects.id, commits.author_id
-    	    ) as user_count
-            group by project_id
-        """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
+      
+    def reopened_issues(self, repoid):
+        reOpenedIssuesSQL = s.sql.text("""
+            SELECT date(issue_events.created_at) as 'date', issue_events.issue_id as 'reopened issues', action as 'action' 
+            FROM issue_events
+            WHERE issue_events.action= "reopened"
+        """)
+        
+        return pd.read_sql(reOpenedIssuesSQL, self.db, params={"repoid": str(repoid)})
 
     def community_activity(self, repoid):
         """
@@ -324,6 +335,7 @@ class GHTorrent(object):
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
+
     def Contributor_Breadth(self, repoid):
         """
         Determines Number of Non-Project Member commits
@@ -339,3 +351,4 @@ class GHTorrent(object):
 	group by projects.id
 	""")
         return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
+

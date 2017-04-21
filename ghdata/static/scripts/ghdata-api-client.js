@@ -177,10 +177,14 @@ GHDataAPIClient.prototype.distributionWork = function (params) {
 	return this.get('dist_work', params);
 };
 
+GHDataAPIClient.prototype.reopened_issues = function (params) {
+  return this.get('timeseries/reopened_issues', params);
+};
+
 GHDataAPIClient.prototype.communityActivity = function (params){
 	return this.get('timeseries/community_activity', params);
 };
 
 GHDataAPIClient.prototype.contributorBreadth = function (params) {
-  return this.get('contributorBreadth', params);
+  return this.get('timeseries/contributorBreadth', params);
 };
