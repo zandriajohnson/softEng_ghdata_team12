@@ -292,8 +292,8 @@ class GHTorrent(object):
 
 #Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
-    	    distWorkSQL = s.sql.text("""
-                 select avg(num_users) as average_num_users, project_name as 'project name', url, numcommits as 'commits'
+    	distWorkSQL = s.sql.text("""
+                 select avg(num_users) as average_num_users, project_name as project name, url, numcommits as commits
                  from
     	           (
     	              select projects.id as project_id, projects.name as project_name,
@@ -313,7 +313,7 @@ class GHTorrent(object):
       
     def reopened_issues(self, repoid):
         reOpenedIssuesSQL = s.sql.text("""
-            SELECT date(issue_events.created_at) as 'date', issue_events.issue_id as 'reopened issues', action as 'action' 
+            SELECT date(issue_events.created_at) as date, issue_events.issue_id as reopened issues, action as action 
             FROM issue_events
             WHERE issue_events.action= "reopened"
         """)
@@ -326,11 +326,12 @@ class GHTorrent(object):
         """
 
         communityActivitySQL = s.sql.text("""
-        select project_commits.project_id as project_id, commits.author_id
-        as author_id, count(project_commits.commit_id) as num_commits from commits
-        join project_commits on commits.id = project_commits.commit_id
-        join projects on projects.id = project_commits.project_id
-        group by project_id, author_id
+            SELECT project_commits.project_id as project_id, commits.author_id
+            as author_id, count(project_commits.commit_id) as num_commits 
+	    from commits
+            join project_commits on commits.id = project_commits.commit_id
+            join projects on projects.id = project_commits.project_id
+            group by project_id, author_id
         """)
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
@@ -354,7 +355,7 @@ class GHTorrent(object):
     #Adam's Metric for SPRINT 2    
     def contributor_diversity(self, repoid):
         contributorDiversitySQL = s.sql.text("""
-            SELECT date(pull+_request_history.created_at) as "contributor_diversity"
+            SELECT date(pull_request_history.created_at) as "contributor_diversity"
             FROM pull_request_history
             WHERE projects.id = :repoid
         """)
