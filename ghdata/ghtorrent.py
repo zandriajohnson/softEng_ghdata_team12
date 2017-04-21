@@ -361,3 +361,11 @@ class GHTorrent(object):
             """)
 
             return pd.read_sql(communityActivitySQL, self.db, params={"repoid:" str(repoid)})
+        
+        def reopened_issues(self, repoid):
+        reOpenedIssuesSQL = s.sql.text("""
+            SELECT issue_events.issue_id, action, issue_events.created_at as reopened_at 
+            FROM issue_events
+            WHERE issue_events.action= "reopened"
+        """)
+        return pd.read_sql(projectDaysSQL, self.db, params={"repoid": str(repoid)})
