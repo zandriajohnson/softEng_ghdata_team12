@@ -177,13 +177,14 @@ GHDataAPIClient.prototype.committerLocations = function (params) {
 //Our code begins here  
 
 //Zandria's Stuff
-GHDataAPIClient.prototype.dist_work = function (params) {
+GHDataAPIClient.prototype.distWork = function (params) {
 	return this.get('dist_work', params);
 };
 
-GHDataAPIClient.prototype.reopened_issues = function (params) {
-  return this.get('timeseries/reopened_issues', params);
+GHDataAPIClient.prototype.reopenedIssues = function (params) {
+  return this.get('reopened_issues', params);
 };
+
 
 //Jordan's Stuff
 
