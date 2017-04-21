@@ -177,7 +177,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	//Contributor Diversity
 	this.api.contributorDiversity().then(function (contributor) {
-            console.log(age);  
+            console.log(contributorDiversity);  
         MG.data_graphic({
         title: "Contributory Diversity",
               data: MG.convert.date(yourMetric, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
