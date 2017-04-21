@@ -191,5 +191,7 @@ GHDataReport.prototype.buildReport = function () {
               target: '#contributorDiversity-over-time'
       });
     });
+  }
+}
 
 var client = new GHDataReport();
