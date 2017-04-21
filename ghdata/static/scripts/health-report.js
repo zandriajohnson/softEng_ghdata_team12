@@ -106,10 +106,8 @@ GHDataReport.prototype.buildReport = function () {
 	
 	//Our code begins here!!! 
 	//Distribution of Work
+
 	this.api.dist_work().then(function (dist_work) {
-        console.log(dist_work)
-     
-      
 	   MG.data_graphic({
     	  title: "Commits/Project",
     	  data: data,
@@ -123,10 +121,27 @@ GHDataReport.prototype.buildReport = function () {
     	  target: '#distribution-over-time'
      });
    });
+    
+   this.api.reopened_issues().then(function (reopened_issues) {
+     MG.data_graphic({
+      title: "Reopened Issues/ Month",
+      data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+      chart_type: 'point',
+      least_squares: true,
+      full_width: true,
+      height: 300,
+      color_range: ['#aaa'],
+      x_accessor: 'date',
+      y_accessor: 'reopened issues',
+      target: '#reopenedissues-over-time'
+    });
+  });
+    
+    
        
 	//Community Activity
-	this.api.communityActivity().then(function (communityActivity) {
-      console.log(communityActivity)
+	this.api.communityActivity().then(function (community_activity) {
+      console.log(communityActivity);
 	  
 	  MG.data_graphic({
         title: "Community Activity/Week",
@@ -141,20 +156,24 @@ GHDataReport.prototype.buildReport = function () {
         target: '#communityActivity-over-time'
       });
     });
-	  
-	  this.api.reopened_issues().then(function (reopened_issues) {
-     MG.data_graphic({
-    title: "Reopened Issues/ Month",
-    data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
-    chart_type: 'point',
-    least_squares: true,
-    full_width: true,
-    height: 300,
-    color_range: ['#aaa'],
-    x_accessor: 'date',
-    y_accessor: 'reopened issues',
-    target: '#reopenedissues-over-time'
-});
+
+	
+	// Contributor Breadth
+	this.api.contributorBreadth().then(function (Contributor_Breadth) {
+			console.log(contributorBreadth);
+		MG.data_graphic({
+        title: "Core/Non-Core Contributors",
+			  data: MG.convert.date(conributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+			  chart_type: 'point',
+			  least_squares: true,
+			  full_width: true,
+			  height: 300,
+			  color_range: ['#aaa'],
+			  x_accessor: 'date',
+			  y_accessor: 'watchers',
+			  target: '#Contributors-over-time'
+	    });
+    });
   }
 };
 
