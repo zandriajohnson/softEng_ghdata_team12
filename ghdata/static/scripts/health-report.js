@@ -146,7 +146,7 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.contributorBreadth().then(function (Contributor_Breadth) {
 			console.log(contributorBreadth);
 			MG.data_graphic({
-			title: "Core/Non-Core Contributors,
+			title: "Core/Non-Core Contributors",
 			data: MG.convert.date(conributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
 			chart_type: 'point',
 			least_squares: true,
