@@ -177,7 +177,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	//Contributor Diversity
 	this.api.contributorDiversity().then(function (contributor) {
-            console.log(age);  
+            
         MG.data_graphic({
         title: "Contributory Diversity",
               data: MG.convert.date(yourMetric, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
@@ -192,6 +192,6 @@ GHDataReport.prototype.buildReport = function () {
       });
     });
   }
-}
+};
 
 var client = new GHDataReport();
