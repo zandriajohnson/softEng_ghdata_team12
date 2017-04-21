@@ -141,6 +141,20 @@ GHDataReport.prototype.buildReport = function () {
         target: '#communityActivity-over-time'
       });
     });
+	  
+	  this.api.reopened_issues().then(function (reopened_issues) {
+     MG.data_graphic({
+    title: "Reopened Issues/ Month",
+    data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+    chart_type: 'point',
+    least_squares: true,
+    full_width: true,
+    height: 300,
+    color_range: ['#aaa'],
+    x_accessor: 'date',
+    y_accessor: 'reopened issues',
+    target: '#reopenedissues-over-time'
+});
   }
 };
 
