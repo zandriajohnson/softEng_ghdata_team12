@@ -364,7 +364,7 @@ class GHTorrent(object):
         
         def reopened_issues(self, repoid):
         reOpenedIssuesSQL = s.sql.text("""
-            SELECT issue_events.issue_id, action, issue_events.created_at as reopened_at 
+            SELECT date(issue_events.created_at) as 'date', issue_events.issue_id as 'reopened issues', action as 'action' 
             FROM issue_events
             WHERE issue_events.action= "reopened"
         """)
