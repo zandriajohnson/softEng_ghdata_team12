@@ -172,9 +172,24 @@ GHDataReport.prototype.buildReport = function () {
 			  x_accessor: 'date',
 			  y_accessor: 'watchers',
 			  target: '#Contributors-over-time'
-	    });
+	  });
     });
-  }
-};
+
+	//Contributor Diversity
+	this.api.contributorDiversity().then(function (contributor) {
+            console.log(age);  
+        MG.data_graphic({
+        title: "Contributory Diversity",
+              data: MG.convert.date(yourMetric, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+              chart_type: 'point',
+              least_squares: true,
+              full_width: true,
+              height: 300,
+              color_range: ['#aaa'],
+              x_accessor: 'date',
+              y_accessor: 'watchers',
+              target: '#contributorDiversity-over-time'
+      });
+    });
 
 var client = new GHDataReport();

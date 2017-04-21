@@ -335,20 +335,28 @@ class GHTorrent(object):
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
-
     def Contributor_Breadth(self, repoid):
         """
         Determines Number of Non-Project Member commits
         """
         contributorBreadthSQL = s.sql.text("""
-	SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
-	from
-	commits
-	join projects on commits.project_id = projects.id
-	join users on users.id = commits.author_id
-	where (projects.id, users.id) not in
-	(select repo_id, user_id from project_members)
-	group by projects.id
-	""")
+	    SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
+	    from
+	    commits
+	    join projects on commits.project_id = projects.id
+	    join users on users.id = commits.author_id
+	    where (projects.id, users.id) not in
+	    (select repo_id, user_id from project_members)
+	    group by projects.id
+	    """)
         return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
+    
+    #Adam's Metric for SPRINT 2    
+    def contributor_diversity(self, repoid):
+        contributorDiversitySQL = s.sql.text("""
+            SELECT date(pull+_request_history.created_at) as "contributor_diversity"
+            FROM pull_request_history
+            WHERE projects.id = :repoid
+        """)
+        return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
