@@ -325,13 +325,13 @@ class GHTorrent(object):
             Tallies up different forms of participation or engagement
         """
 
-        #communityActivitySQL = s.sql.text("""
-        #SELECT DATE(select project_commits.project_id as project_id, commits.author_id
-        #as author_id, count(project_commits.commit_id) as num_commits from commits
-        #join project_commits on commits.id = project_commits.commit_id
-        #join projects on projects.id = project_commits.project_id
-        #group by project_id, author_id
-        #""")
+        communityActivitySQL = s.sql.text("""
+        select project_commits.project_id as project_id, commits.author_id
+        as author_id, count(project_commits.commit_id) as num_commits from commits
+        join project_commits on commits.id = project_commits.commit_id
+        join projects on projects.id = project_commits.project_id
+        group by project_id, author_id
+        """)
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
