@@ -293,13 +293,13 @@ class GHTorrent(object):
 #Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
     	distWorkSQL = s.sql.text("""
-                 select avg(num_users) as average_num_users, project_name as project name, url, numcommits as commits
-                 from
+                 SELECT avg(num_users) AS "average_num_users", project_name AS "project name", url, numcommits AS "commits"
+                 FROM
     	           (
-    	              select projects.id as project_id, projects.name as project_name,
+    	              SELECT projects.id as project_id, projects.name as project_name,
     			          projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
     			          count(users.id) as num_users
-    		            from commits
+    		            FROM commits
     			          join project_commits on commits.id = project_commits.project_id
     			          join projects on projects.id = project_commits.project_id
     			          join users on commits.author_id = users.id
@@ -313,7 +313,7 @@ class GHTorrent(object):
       
     def reopened_issues(self, repoid):
         reOpenedIssuesSQL = s.sql.text("""
-            SELECT date(issue_events.created_at) as date, issue_events.issue_id as reopenedissues, action as action 
+            SELECT date(issue_events.created_at) AS "date", issue_events.issue_id AS "reopenedissues", action AS "action" 
             FROM issue_events
             WHERE issue_events.action= "reopened"
         """)
