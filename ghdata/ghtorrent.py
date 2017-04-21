@@ -330,7 +330,7 @@ class GHTorrent(object):
 
         def dist_work(self, repoid):
     	    distWorkSQL = s.sql.text("""
-                 select avg(num_users) as average_num_users, project_name, url, numcommits
+                 select avg(num_users) as average_num_users, project_name as 'project name', url, numcommits as 'commits'
                  from
     	           (
     	              select projects.id as project_id, projects.name as project_name,
