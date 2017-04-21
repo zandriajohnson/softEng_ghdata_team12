@@ -11,12 +11,122 @@
     <script src="scripts/ghdata-api-client.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="scripts/metricsgraphics.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+	<script>
+		function changeRepo(holder){
+			var repo = holder.value;
+			var owner = $("#list option:selected").text();
+			document.getElementById('repo').value = repo;
+			document.getElementById('owner').value = owner;
+			
+			document.forms[0].submit();
+		}
+	</script>
   </head>
   <body>
 
     <!-- basic form to get the owner and repo. GET causes auto formating into the URL on submit -->
     <div class="row">
-      <form name="input" method="GET" style="background:#ddd; padding:30px">
+      <!-- Select from this list of repos http://ghtorrent.org/msr14.html -->
+	  <select onChange="changeRepo(this)" id="list">
+		<option value="">Select Repo Name</option>
+		<option value="akka">akka</option>
+		<option value="hadley">devtools</option>
+		<option value="johnmyleswhite">ProjectTemplate</option>
+		<option value="mavam">stat-cookbook</option>
+		<option value="facebook">hiphop-php</option>
+		<option value="yihui">knitr</option>
+		<option value="rstudio">shiny</option>
+		<option value="facebook">folly</option>
+		<option value="mongodb">mongo</option>
+		<option value="TTimo">doom3.gpl</option>
+		<option value="ariya">phantomjs</option>
+		<option value="TrinityCore">TrinityCore</option>
+		<option value="mangos">MaNGOS</option>
+		<option value="bitcoin">bitcoin</option>
+		<option value="keithw">mosh</option>
+		<option value="xbmc">xbmc</option>
+		<option value="joyent">http-parser</option>
+		<option value="kr">beanstalkd</option>
+		<option value="antirez">redis</option>
+		<option value="liuliu">ccy</option>
+		<option value="memcached">memcached</option>
+		<option value="openFrameworks">openframeworks</option>
+		<option value="libgit2">libgit2</option>
+		<option value="vmg">redcarpet</option>
+		<option value="joyent">libuv</option>
+		<option value="SignalR">SignalR</option>
+		<option value="hbons">SparkleShare</option>
+		<option value="moxiecode">plupload</option>
+		<option value="mono">mono</option>
+		<option value="NancyFx">Nancy</option>
+		<option value="ServiceStack">ServiceStack</option>
+		<option value="AutoMapper">AutoMapper</option>
+		<option value="restsharp">RestSharp</option>
+		<option value="ravendb">ravendb</option>
+		<option value="SamSaffrom">MiniProfiler</option>
+		<option value="nathanmarz">storm</option>
+		<option value="elasticsearch">elasticsearch</option>
+		<option value="JakeWharton">ActionBarSherlock</option>
+		<option value="facebook">facebook-android-sdk</option>
+		<option value="clojure">clojure</option>
+		<option value="Bukkit">CraftBukkit</option>
+		<option value="netty">netty</option>
+		<option value="github">android</option>
+		<option value="joyent">node</option>
+		<option value="jquery">jquery</option>
+		<option value="h5bp">html5-boilerplate</option>
+		<option value="bartaz">impress.js</option>
+		<option value="mbostock">d3</option>
+		<option value="harvesthq">chosen</option>
+		<option value="FortAwesome">Fort-Awesome</option>
+		<option value="mrdoob">three.js</option>
+		<option value="zurb">foundation</option>
+		<option value="symfony">symfony</option>
+		<option value="EllisLab">CodeIgniter</option>
+		<option value="facebook">php-sdk</option>
+		<option value="zendframework">zf2</option>
+		<option value="cakephp">cakephp</option>
+		<option value="ginatrapani">ThinkUp</option>
+		<option value="sebastianbergmann">phpunit</option>
+		<option value="codeguy">Slim</option>
+		<option value="django">django</option>
+		<option value="facebook">tornado</option>
+		<option value="jkbr">httpie</option>
+		<option value="mitsuhiko">flask</option>
+		<option value="kennethreitz">requests</option>
+		<option value="xphere-forks">symfony</option>
+		<option value="reddit">reddit</option>
+		<option value="boto">boto</option>
+		<option value="django-debug-toolbar">django-debug-toolbar</option>
+		<option value="midgetspy">Sick-Beard</option>
+		<option value="divio">django-cms</option>
+		<option value="rails">rails</option>
+		<option value="mxcl">homebrew</option>
+		<option value="mojombo">jekyll</option>
+		<option value="gitlabhq">gitlabhq</option>
+		<option value="diaspora">diaspora</option>
+		<option value="plataformatec">devise</option>
+		<option value="joshuaclayton">blueprint-css</option>
+		<option value="imathis">octopress</option>
+		<option value="vinc">vinc.cc</option>
+		<option value="thoughtbot">paperclip</option>
+		<option value="chriseppstein">compass</option>
+		<option value="twitter">finagle</option>
+		<option value="robey">kestrel</option>
+		<option value="twitter">flockdb</option>
+		<option value="twitter">gizzard</option>
+		<option value="sbt">sbt</option>
+		<option value="scala">scala</option>
+		<option value="scalatra">scalatra</option>
+		<option value="twitter">zipkin</option>
+	
+	
+	
+	  </select>
+	  
+	  <form id="repoForm" name="input" method="GET" style="background:#ddd; padding:30px">
         <div class="form-group">
           <label for="owner">Owner</label>
           <input type="text" class="form-control" name="owner" id="owner">
@@ -30,8 +140,8 @@
         </form>
     </div>
 
-    <div class="container">
-      <div class="row report">
+    <div class="container">	  
+	  <div class="row report">
         <section>
           <div class="row">
             <div class="nine columns"><h1 id="repo-label"> facebook / folly </h1></div>
@@ -46,11 +156,22 @@
             <div class="four columns" id="stargazers-over-time"></div>
             <div class="four columns" id="forks-over-time"></div>
           </div>
+		
           <!-- <h2>Growth Indicators</h2> -->
           <div class="row trends">
             <div class="four columns" id="issues-over-time"></div>
             <div class="four columns" id="pulls-over-time"></div>
-          </div>
+	    <div class="four columns" id="communityActivity-over-time"></div>
+	  </div>
+		
+	  <div class= "row trends">
+		<div class="four columns" id="distribution-over-time"></div>
+      		<div class="four columns" id="reopenedissues-over-time"></div>
+		<div class="four columns" id="Contributors-over-time"></div>
+	  </div>
+	<div class= "row trends">
+		<div class="four columns" id="ContributorDiversity-over-time"></div>
+	</div>	
         </section>
         </div> <!-- end of report -->
 

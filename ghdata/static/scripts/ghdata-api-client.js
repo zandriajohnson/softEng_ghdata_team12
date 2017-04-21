@@ -170,11 +170,34 @@ GHDataAPIClient.prototype.contributors = function (params) {
  */
 GHDataAPIClient.prototype.committerLocations = function (params) {
   return this.get('commits/locations', params);
+};
+
+
 
 //Our code begins here  
-GHDataAPIClient.prototype.distributionWork = function (params) {
-	return this.get('dist_work', params)};
+
+//Zandria's Stuff
+GHDataAPIClient.prototype.dist_work = function (params) {
+	return this.get('timeseries/dist_work', params);
+};
+
+GHDataAPIClient.prototype.reopened_issues = function (params) {
+  return this.get('timeseries/reopened_issues', params);
+};
+
+
+//Jordan's Stuff
 
 GHDataAPIClient.prototype.communityActivity = function (params){
 	return this.get('timeseries/community_activity', params);
+};
+
+//#Adam
+
+GHDataAPIClient.prototype.contributorBreadth = function (params) {
+  return this.get('timeseries/contributorBreadth', params);
+};
+
+GHDataAPIClient.prototype.contributorDiversity = function (params) {
+  return this.get('timeseries/contributorDiversity', params);
 };

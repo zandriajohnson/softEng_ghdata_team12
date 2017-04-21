@@ -406,11 +406,15 @@ app.route('/{}/<owner>/<repo>/commits/locations'.format(GHDATA_API_VERSION))(fla
                         }
                     ]
 """
-app.route('/{}/<owner>/<repo>/linking_websites'.format(GHDATA_API_VERSION))(flaskify(app, publicwww.linking_websites))
+app.route('/{}/<owner>/<repo>/linking_websites'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(app, publicwww.linking_websites))
 #Jordan's Endpoint
-app.route('/{}/<owner>/<repo>/Contibutor_Breadth'.format(GHDATA_API_VERSION))(basic_endpoint(app, 'Contributor_Breadth'))
+app.route('/{}/<owner>/<repo>/timeseries/community_activity'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(app, ghtorrent.community_activity))
+#Adam
+app.route('/{}/<owner>/<repo>/timeseries/Contibutor_Breadth'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(app, ghtorrent.Contributor_Breadth))
+app.route('/{}/<owner>/<repo>/timeseries/contributor_diversity'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.contributor_diversity))
 #Zandria's Endpoint
-app.route('/{}/<owner>/<repo>/dist_work'.format(GHDATA_API_VERSION))(basic_endpoint(app, 'dist_work'))
+app.route('/{}/<owner>/<repo>/timeseries/reopened_issues'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.reopened_issues))
+app.route('/{}/<owner>/<repo>/timeseries/dist_work'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.dist_work))
 
 
 if (DEBUG):
