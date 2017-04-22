@@ -367,3 +367,23 @@ class GHTorrent(object):
         """)
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
+    #Jack's Metric for Sprint 2
+    def contribution_acceptance(self, repoid):
+        contributionAcceptanceSQL = s.sql.text("""
+        SELECT projects.name AS project_name, DATE(date_created), CAST(num_approved AS DECIMAL)/CAST(num_open AS DECIMAL) AS approved_over_opened
+        FROM (SELECT COUNT(DISTINCT pull_request_id) AS num_approved, projects.name AS project_name, DATE(pull_request_history.created_at) AS accepted_on
+            FROM pull_request_history
+                JOIN pull_requests ON pull_request_history.pull_request_id = pull_request_id
+                JOIN projects ON pull_request.base_repo_id = projects.id
+            WHERE action = 'merged'
+            GROUP BY projects.id, accepted_on) accepted
+        JOIN (SELECT COUNT(distinct pull_request_id) AS num_open, projects.id AS repo_id, DATE(pull_request_history.created_at) AS date_created
+            FROM pull_request_history
+                JOIN pull_requests ON pull_request_history.pull_request_id = pull_requests.id
+                JOIN projects ON pull_requests.base_repo_id = projects.id
+                WHERE pull_request_id IN
+                (SELECT pull_request_id FROM pull_request_history WHERE action = 'opened')
+                    GROUP BY projects.id, date_created) opened ON opened.date_created = accepted.accepted_on
+           JOIN projects ON repo_id = projects.id
+        """)
+        return pd.read_sql(contributorDiversitySQL, self.db, params ={"repoid": str(repoid)})
