@@ -386,4 +386,4 @@ class GHTorrent(object):
                     GROUP BY projects.id, date_created) opened ON opened.date_created = accepted.accepted_on
            JOIN projects ON repo_id = projects.id
         """)
-        return pd.read_sql(contributorDiversitySQL, self.db, params ={"repoid": str(repoid)})
+        return pd.read_sql(contributionAcceptanceSQL, self.db, params ={"repoid": str(repoid)})
