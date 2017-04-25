@@ -1,9 +1,10 @@
-#SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: MIT
 import pandas as pd
 import sqlalchemy as s
 import sys
 import json
 import re
+
 
 class GHTorrent(object):
     """Uses GHTorrent and other GitHub data sources and returns dataframes with interesting GitHub indicators"""
@@ -290,34 +291,32 @@ class GHTorrent(object):
 
         return pd.read_sql(pullAcceptanceSQL, self.db, params={"repoid": str(repoid)})
 
-#Zandria's metrics dist_work and reopened_issues
+    # Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
-    	distWorkSQL = s.sql.text("""
-                 SELECT avg(num_users) AS "average_num_users", project_name AS "project name", url, numcommits AS "commits"
-                 FROM
-    	           (
-    	              SELECT projects.id as project_id, projects.name as project_name,
-    			          projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
-    			          count(users.id) as num_users
-    		            FROM commits
-    			          join project_commits on commits.id = project_commits.project_id
-    			          join projects on projects.id = project_commits.project_id
-    			          join users on commits.author_id = users.id
-    	              group by projects.id, commits.author_id
-    	            ) as user_count
-                  group by project_id
-              """)
-
+        distWorkSQL = s.sql.text("""
+        SELECT avg(num_users) AS "average_num_users", project_name AS "project name", url, numcommits AS "commits"
+        FROM
+    	    (SELECT projects.id as project_id, projects.name as project_name,
+    		projects.url as url, commits.id as commit_id, count(commits.id) as numcommits,
+    		count(users.id) as num_users
+    		FROM commits
+    		join project_commits on commits.id = project_commits.project_id
+    		join projects on projects.id = project_commits.project_id
+    		join users on commits.author_id = users.id
+    	    group by projects.id, commits.author_id
+    	    ) as user_count
+        GROUP BY project_id
+        """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
-      
+
     def reopened_issues(self, repoid):
         reOpenedIssuesSQL = s.sql.text("""
-            SELECT date(issue_events.created_at) AS "date", issue_events.issue_id AS "reopenedissues", action AS "action" 
-            FROM issue_events
-            WHERE issue_events.action= "reopened"
+        SELECT date(issue_events.created_at) AS "date", issue_events.issue_id AS "reopenedissues", action AS "action"
+        FROM issue_events
+        WHERE issue_events.action= "reopened"
         """)
-        
+
         return pd.read_sql(reOpenedIssuesSQL, self.db, params={"repoid": str(repoid)})
 
     def community_activity(self, repoid):
@@ -326,12 +325,12 @@ class GHTorrent(object):
         """
 
         communityActivitySQL = s.sql.text("""
-            SELECT project_commits.project_id as project_id, commits.author_id
-            as author_id, count(project_commits.commit_id) as num_commits 
+        SELECT project_commits.project_id as project_id, commits.author_id
+        as author_id, count(project_commits.commit_id) as num_commits
 	    from commits
-            join project_commits on commits.id = project_commits.commit_id
-            join projects on projects.id = project_commits.project_id
-            group by project_id, author_id
+        join project_commits on commits.id = project_commits.commit_id
+        join projects on projects.id = project_commits.project_id
+        group by project_id, author_id
         """)
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
@@ -341,18 +340,18 @@ class GHTorrent(object):
         Determines Number of Non-Project Member commits
         """
         contributorBreadthSQL = s.sql.text("""
-	    SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
-	    from
-	    commits
-	    join projects on commits.project_id = projects.id
-	    join users on users.id = commits.author_id
-	    where (projects.id, users.id) not in
-	    (select repo_id, user_id from project_members)
-	    group by projects.id
-	    """)
+	SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
+	from
+	commits
+	join projects on commits.project_id = projects.id
+	join users on users.id = commits.author_id
+	where (projects.id, users.id) not in
+	(select repo_id, user_id from project_members)
+	group by projects.id
+	""")
         return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
-    
-    #Adam's Metric for SPRINT 2    
+
+    # Adam's Metric for SPRINT 2
     def contributor_diversity(self, repoid):
         contributorDiversitySQL = s.sql.text("""
         SELECT count(distinct org_id) as num_organizations, projects.name as project_name, url
@@ -367,7 +366,7 @@ class GHTorrent(object):
         """)
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
-    #Jack's Metric for Sprint 2
+    # Jack's Metric for Sprint 2
     def contribution_acceptance(self, repoid):
         contributionAcceptanceSQL = s.sql.text("""
         SELECT projects.name AS project_name, DATE(date_created), CAST(num_approved AS DECIMAL)/CAST(num_open AS DECIMAL) AS approved_over_opened
@@ -386,4 +385,4 @@ class GHTorrent(object):
                     GROUP BY projects.id, date_created) opened ON opened.date_created = accepted.accepted_on
            JOIN projects ON repo_id = projects.id
         """)
-        return pd.read_sql(contributionAcceptanceSQL, self.db, params ={"repoid": str(repoid)})
+        return pd.read_sql(contributionAcceptanceSQL, self.db, params={"repoid": str(repoid)})
