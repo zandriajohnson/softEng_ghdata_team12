@@ -111,30 +111,32 @@ GHDataReport.prototype.buildReport = function () {
 	   MG.data_graphic({
     	  title: "Commits/Project",
     	  data: dist_work,
-    	  chart_type: 'bar',
+    	  chart_type: 'point',
     	  least_squares: true,
     	  full_width: true,
           width: 650,
-    	  height: 300,
     	  color_range: ['#aaa'],
     	  x_accessor: 'project name',
+         x_label: 'project',
     	  y_accessor: 'commits',
+		   y_label" ' number of commits'
     	  target: '#distribution-over-time'
      });
    });
     
    this.api.reopened_issues().then(function (reopened_issues) {
      MG.data_graphic({
-      title: "Reopened Issues/ Month",
-      data: MG.convert.date(reopened_issues, 'date', 'month'),
+      title: "Reopened Issues/Month",
+      data: MG.convert.date(reopened_issues, 'month'),
       chart_type: 'line',
       least_squares: true,
       full_width: true,
       height: 300,
-      width: 650,
       color_range: ['#aaa'],
       x_accessor: 'date',
+	x_label: 'Month',     
       y_accessor: 'reopenedissues',
+	     y_label: 'number of reopened issues',
       target: '#reopenedissues-over-time'
     });
   });
