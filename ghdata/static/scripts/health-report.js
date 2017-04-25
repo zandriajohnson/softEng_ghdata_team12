@@ -176,7 +176,7 @@ GHDataReport.prototype.buildReport = function () {
     });
 
 	//Contributor Diversity
-	this.api.contributorDiversity().then(function (contributor) {
+	this.api.contributorDiversity().then(function (contributor_diversity) {
             console.log(contributorDiversity);
         MG.data_graphic({
         title: "Contributory Diversity",
