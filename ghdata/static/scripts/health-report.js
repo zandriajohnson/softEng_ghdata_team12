@@ -114,12 +114,12 @@ GHDataReport.prototype.buildReport = function () {
     	  chart_type: 'point',
     	  least_squares: true,
     	  full_width: true,
-          width: 650,
+           height: 300,
     	  color_range: ['#aaa'],
     	  x_accessor: 'project name',
          x_label: 'project',
     	  y_accessor: 'commits',
-		   y_label" ' number of commits'
+		   y_label: ' number of commits',
     	  target: '#distribution-over-time'
      });
    });
