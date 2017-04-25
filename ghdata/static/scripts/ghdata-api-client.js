@@ -206,4 +206,6 @@ GHDataAPIClient.prototype.contributionAcceptance = function (params) {
 	return this.get('timeseries/contribution_acceptance', params);
 };
 	
-	
+GHDataAPIClient.prototype.bus_factor = function (params) {
+	return this.get('timeseries/bus_factor', params);
+};

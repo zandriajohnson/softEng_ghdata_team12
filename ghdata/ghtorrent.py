@@ -386,3 +386,9 @@ class GHTorrent(object):
            JOIN projects ON repo_id = projects.id
         """)
         return pd.read_sql(contributionAcceptanceSQL, self.db, params={"repoid": str(repoid)})
+
+    def bus_factor(self, repoid):
+        busFactorSQL = s.sql.text("""
+            
+        """)
+        return pd.read_sql(busFactorSQL, self.db, params={"repoid": str(repoid)})
