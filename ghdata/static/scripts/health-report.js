@@ -125,7 +125,7 @@ GHDataReport.prototype.buildReport = function () {
    this.api.reopened_issues().then(function (reopened_issues) {
      MG.data_graphic({
       title: "Reopened Issues/Month",
-      data: MG.convert.date(reopened_issues, 'month'),
+      data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
       chart_type: 'line',
       least_squares: true,
       full_width: true,
