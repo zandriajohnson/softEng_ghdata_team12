@@ -163,7 +163,7 @@ GHDataReport.prototype.buildReport = function () {
 			console.log(contributorBreadth);
 		MG.data_graphic({
         title: "Core/Non-Core Contributors",
-			  data: MG.convert.date(conributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+			  data: MG.convert.date(contributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
 			  chart_type: 'point',
 			  least_squares: true,
 			  full_width: true,
@@ -180,7 +180,7 @@ GHDataReport.prototype.buildReport = function () {
             console.log(contributorDiversity);
         MG.data_graphic({
         title: "Contributory Diversity",
-              data: MG.convert.date(yourMetric, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+              data: MG.convert.date(contributorDiversity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
               chart_type: 'point',
               least_squares: true,
               full_width: true,
