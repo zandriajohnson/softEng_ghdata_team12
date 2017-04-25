@@ -192,7 +192,7 @@ GHDataReport.prototype.buildReport = function () {
       });
     });
 	  	//contribution_acceptance
-	this.api.communityActivity().then(function (contribution_acceptance) {
+	this.api.contributionAcceptance().then(function (contribution_acceptance) {
       console.log(contributionAcceptance);
 	  
 	  MG.data_graphic({
