@@ -374,7 +374,7 @@ class GHTorrent(object):
         FROM (SELECT COUNT(DISTINCT pull_request_id) AS num_approved, projects.name AS project_name, DATE(pull_request_history.created_at) AS accepted_on
             FROM pull_request_history
                 JOIN pull_requests ON pull_request_history.pull_request_id = pull_request_id
-                JOIN projects ON pull_request.base_repo_id = projects.id
+                JOIN projects ON pull_requests.base_repo_id = projects.id
             WHERE action = 'merged'
             GROUP BY projects.id, accepted_on) accepted
         JOIN (SELECT COUNT(distinct pull_request_id) AS num_open, projects.id AS repo_id, DATE(pull_request_history.created_at) AS date_created
