@@ -111,9 +111,10 @@ GHDataReport.prototype.buildReport = function () {
 	   MG.data_graphic({
     	  title: "Commits/Project",
     	  data: dist_work,
-    	  chart_type: 'point',
+    	  chart_type: 'bar',
     	  least_squares: true,
     	  full_width: true,
+          width: 650,
     	  height: 300,
     	  color_range: ['#aaa'],
     	  x_accessor: 'project name',
@@ -125,7 +126,7 @@ GHDataReport.prototype.buildReport = function () {
    this.api.reopened_issues().then(function (reopened_issues) {
      MG.data_graphic({
       title: "Reopened Issues/ Month",
-      data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+      data: MG.convert.date(reopened_issues, 'date', 'month'),
       chart_type: 'line',
       least_squares: true,
       full_width: true,
