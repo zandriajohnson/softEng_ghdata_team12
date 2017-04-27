@@ -299,7 +299,7 @@ class GHTorrent(object):
         JOIN project_commits on commits.id = project_commits.project_id
         JOIN projects on projects.id = project_commits.project_id
     	JOIN users on commits.author_id = users.id
-    	GROUP BY project_name
+    	GROUP BY project_name, YEAR(date)
         """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
