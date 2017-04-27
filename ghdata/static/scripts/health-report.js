@@ -110,14 +110,14 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
     	  title: "Commits/Project",
-    	  data:  MG.convert.date(dist_work, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+    	  data:  dist_work,
     	  chart_type: 'point',
     	  least_squares: true,
     	  full_width: true,
            height: 300,
     	  color_range: ['#aaa'],
-    	  x_accessor: 'project name',
-    	  y_accessor: 'commits',
+    	  x_accessor: 'project_name',
+    	  y_accessor: 'numcommits',
     	  target: '#distribution-over-time'
      });
    });
