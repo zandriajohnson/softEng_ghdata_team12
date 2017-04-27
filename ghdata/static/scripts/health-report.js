@@ -176,11 +176,11 @@ GHDataReport.prototype.buildReport = function () {
     });
 
 	//Contributor Diversity
-	this.api.contributorDiversity().then(function (contributor_diversity) {
-            console.log(contributorDiversity);
+	this.api.contributor_diversity().then(function (contributor_diversity) {
+            console.log(contributor_diversity);
         MG.data_graphic({
         title: "Contributory Diversity",
-              data: MG.convert.date(contributorDiversity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+              data: MG.convert.date(contributor_diversity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
               chart_type: 'point',
               least_squares: true,
               full_width: true,
