@@ -109,9 +109,9 @@ GHDataReport.prototype.buildReport = function () {
 
 	this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
-    	  title: "Dist. Of Work/Year",
+    	  title: "Dist. Of Work/Month",
     	  data: MG.convert.date(dist_work, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
-    	  chart_type: 'point',
+    	  chart_type: 'line',
     	  least_squares: true,
     	  full_width: true,
            height: 300,
