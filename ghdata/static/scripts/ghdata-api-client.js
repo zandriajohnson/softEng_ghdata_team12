@@ -199,7 +199,7 @@ GHDataAPIClient.prototype.contributorBreadth = function (params) {
 };
 
 GHDataAPIClient.prototype.contributorDiversity = function (params) {
-  return this.get('timeseries/contributorDiversity', params);
+  return this.get('timeseries/contributor_diversity', params);
 };
 
 
