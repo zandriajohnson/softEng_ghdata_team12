@@ -369,7 +369,7 @@ class GHTorrent(object):
         FROM
         (
         SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id
-        FROM msr14.issue_comments
+        FROM issue_comments
         JOIN issues on issue_comments.issue_id = issues.id
         JOIN projects on issues.repo_id = projects.id
         GROUP BY projects.id, issues.id
