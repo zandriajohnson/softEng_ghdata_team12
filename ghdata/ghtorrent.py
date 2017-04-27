@@ -294,7 +294,12 @@ class GHTorrent(object):
     # Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
         distWorkSQL = s.sql.text("""
-     
+     	SELECT projects.name as "project_name", count(commits.id) as "numcommits", date(commits.created_at) as "date"
+        FROM commits
+        JOIN project_commits on commits.id = project_commits.project_id
+        JOIN projects on projects.id = project_commits.project_id
+    	JOIN users on commits.author_id = users.id
+    	GROUP BY MONTH(commits.created_at)
         """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
@@ -304,7 +309,7 @@ class GHTorrent(object):
         SELECT date(issue_events.created_at) AS "date", issue_events.issue_id AS "reopenedissues", action AS "action"
         FROM issue_events
         WHERE issue_events.action= "reopened"
-	GROUP BY MONTH(date)
+	GROUP BY MONTH(issue_events.created_at)
         """)
 
         return pd.read_sql(reOpenedIssuesSQL, self.db, params={"repoid": str(repoid)})
@@ -359,18 +364,18 @@ class GHTorrent(object):
 
     #Jack's Metric for Sprint 2
     def transparency(self, repoid):
-        transparencySQL = s.sql.text("""
-        SELECT avg(avg_num_comments), project_name
-        FROM
-        (
-        SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id
-        FROM issue_comments
-        JOIN issues on issue_comments.issue_id = issues.id
-        JOIN projects on issues.repo_id = projects.id
-        GROUP BY projects.id, issues.id
-        ) as comments_per_issue
-        GROUP by project_id
-        """)
+   #     transparencySQL = s.sql.text("""
+   #     SELECT avg(avg_num_comments), project_name
+    #    FROM
+    #    (
+    #    SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id
+    #    FROM issue_comments
+     #   JOIN issues on issue_comments.issue_id = issues.id
+     #   JOIN projects on issues.repo_id = projects.id
+      #  GROUP BY projects.id, issues.id
+      #  ) as comments_per_issue
+      #  GROUP by project_id
+      #  """)
         return pd.read_sql(transparencySQL, self.db, params ={"repoid": str(repoid)})
 
     # Alex' metric for sprint 3
@@ -388,7 +393,7 @@ class GHTorrent(object):
               HAVING COUNT(committer_id) > (
                 SELECT .2 * COUNT(id)
                 FROM commits
-                WHERE project_id = repoid
+                WHERE project_id = :repoid
               )
               ORDER BY COUNT(committer_id) DESC
             ) as foo
