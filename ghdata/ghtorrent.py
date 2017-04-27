@@ -294,12 +294,12 @@ class GHTorrent(object):
     # Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
         distWorkSQL = s.sql.text("""
-        SELECT projects.name as "project_name", commits.id as "commit_id", count(commits.id) as "numcommits"
+        SELECT projects.name as "project_name", commits.id as "commit_id", count(commits.id) as "numcommits", date(commits.created_at) as "date"
         FROM commits
         JOIN project_commits on commits.id = project_commits.project_id
         JOIN projects on projects.id = project_commits.project_id
     	JOIN users on commits.author_id = users.id
-    	GROUP BY project_name
+    	GROUP BY YEAR(date), project_name
         """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
