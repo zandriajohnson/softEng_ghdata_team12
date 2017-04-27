@@ -382,8 +382,25 @@ class GHTorrent(object):
         """)
         return pd.read_sql(contributionAcceptanceSQL, self.db, params={"repoid": str(repoid)})
 
+    # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
+            SELECT COUNT(*) as bus_factor
+            FROM (
+              SELECT
+                project_id,
+                committer_id,
+                COUNT(committer_id)
+              FROM commits
+              WHERE project_id = repoid
+              GROUP BY committer_id
+              HAVING COUNT(committer_id) > (
+                SELECT .2 * COUNT(id)
+                FROM commits
+                WHERE project_id = repoid
+              )
+              ORDER BY COUNT(committer_id) DESC
+            ) as foo;
             
         """)
         return pd.read_sql(busFactorSQL, self.db, params={"repoid": str(repoid)})
