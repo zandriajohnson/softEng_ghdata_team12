@@ -191,13 +191,12 @@ GHDataReport.prototype.buildReport = function () {
               target: '#contributorDiversity-over-time'
       });
     });
-	  	//contribution_acceptance
-	this.api.communityActivity().then(function (contribution_acceptance) {
-      console.log(contributionAcceptance);
-	  
-	  MG.data_graphic({
-        title: "Ratio of contributions accepted vs. closed without acceptance.",
-        data: MG.convert.date(contributionAcceptance, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+	  	//transparency
+	this.api.transparency().then(function (transparency) {
+	console.log(transparency);
+	MG.data_graphic({
+        title: "Number of comments per issue.",
+        data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
@@ -205,7 +204,7 @@ GHDataReport.prototype.buildReport = function () {
         color_range: ['#aaa'],
         x_accessor: 'date',
         y_accessor: 'activity',
-        target: '#Ratio-of-accepted-to-closed-without-acceptance'
+        target: '#Number-of-comments-per-issue'
       });
     });
   }
