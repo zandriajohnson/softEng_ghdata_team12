@@ -203,7 +203,7 @@ GHDataAPIClient.prototype.contributorDiversity = function (params) {
 };
 
 GHDataAPIClient.prototype.contribution_acceptance = function (params) {
-	return this.get('timeseries/contribution_acceptance', params);
+	return this.get('timeseries/transparency', params);
 };
 	
 	
