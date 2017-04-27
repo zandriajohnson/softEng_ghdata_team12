@@ -198,6 +198,16 @@ GHDataAPIClient.prototype.contributorBreadth = function (params) {
   return this.get('timeseries/contributorBreadth', params);
 };
 
-GHDataAPIClient.prototype.contributorDiversity = function (params) {
-  return this.get('timeseries/contributorDiversity', params);
+GHDataAPIClient.prototype.contributor_diversity = function (params) {
+  return this.get('timeseries/contributor_diversity', params);
+};
+
+
+GHDataAPIClient.prototype.transparency = function (params) {
+	return this.get('timeseries/transparency', params);
+
+};
+	
+GHDataAPIClient.prototype.bus_factor = function (params) {
+	return this.get('timeseries/bus_factor', params);
 };

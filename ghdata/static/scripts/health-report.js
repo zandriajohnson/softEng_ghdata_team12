@@ -109,24 +109,24 @@ GHDataReport.prototype.buildReport = function () {
 
 	this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
-    	  title: "Commits/Project",
-    	  data: MG.convert.date(dist_work, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),,
-    	  chart_type: 'point',
+    	  title: "Distribution Of Work/Month",
+    	  data: MG.convert.date(dist_work, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+    	  chart_type: 'line',
     	  least_squares: true,
     	  full_width: true,
-    	  height: 300,
+           height: 300,
     	  color_range: ['#aaa'],
-    	  x_accessor: 'project name',
-    	  y_accessor: 'commits',
+    	  x_accessor: 'date',
+    	  y_accessor: 'numcommits',
     	  target: '#distribution-over-time'
      });
    });
     
    this.api.reopened_issues().then(function (reopened_issues) {
      MG.data_graphic({
-      title: "Reopened Issues/ Month",
+      title: "Reopened Issues/Month",
       data: MG.convert.date(reopened_issues, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
-      chart_type: 'point',
+      chart_type: 'line',
       least_squares: true,
       full_width: true,
       height: 300,
@@ -163,7 +163,7 @@ GHDataReport.prototype.buildReport = function () {
 			console.log(contributorBreadth);
 		MG.data_graphic({
         title: "Core/Non-Core Contributors",
-			  data: MG.convert.date(conributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+			  data: MG.convert.date(contributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
 			  chart_type: 'point',
 			  least_squares: true,
 			  full_width: true,
@@ -176,21 +176,58 @@ GHDataReport.prototype.buildReport = function () {
     });
 
 	//Contributor Diversity
-	this.api.contributorDiversity().then(function (contributor) {
-            console.log(contributorDiversity);
+	this.api.contributor_diversity().then(function (contributor_diversity) {
+            console.log(contributor_diversity);
         MG.data_graphic({
-        title: "Contributory Diversity",
-              data: MG.convert.date(yourMetric, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        title: "Contributor Diversity",
+              data: MG.convert.date(contributor_diversity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
               chart_type: 'point',
               least_squares: true,
               full_width: true,
               height: 300,
               color_range: ['#aaa'],
               x_accessor: 'date',
-              y_accessor: 'watchers',
+              y_accessor: 'num_organizations',
               target: '#contributorDiversity-over-time'
       });
     });
+
+	  	//transparency
+	this.api.transparency().then(function (transparency) {
+	console.log(transparency);
+	MG.data_graphic({
+        title: "Number of comments per issue",
+        data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        chart_type: 'point',
+        least_squares: true,
+        full_width: true,
+        height: 300,
+        color_range: ['#aaa'],
+        x_accessor: 'date',
+        y_accessor: 'activity',
+        target: '#Number-of-comments-per-issue'
+      });
+    });
+
+	  	//bus_factor
+	this.api.bus_factor().then(function (bus_factor) {
+      console.log(bus_factor);
+
+	  MG.data_graphic({
+        title: "Bus Factor.",
+        data: [{'date': new Date(), 'value': bus_factor}],
+        chart_type: 'point',
+        least_squares: true,
+        full_width: true,
+        height: 300,
+        color_range: ['#aaa'],
+        x_accessor: 'date',
+        y_accessor: 'value',
+        target: '#bus_factor'
+      });
+    });
+
+
   }
 };
 
