@@ -415,7 +415,7 @@ app.route('/{}/<owner>/<repo>/timeseries/contributor_diversity'.format(GHDATA_AP
 #Zandria's Endpoint
 app.route('/{}/<owner>/<repo>/timeseries/reopened_issues'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.reopened_issues))
 app.route('/{}/<owner>/<repo>/timeseries/dist_work'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.dist_work))
-app.route('/{}/<owner>/<repo>/timeseries/contribution_acceptance'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.dist_work))
+app.route('/{}/<owner>/<repo>/timeseries/transparency'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.transparency))
 
 
 if (DEBUG):
