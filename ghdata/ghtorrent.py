@@ -315,6 +315,7 @@ class GHTorrent(object):
         SELECT date(issue_events.created_at) AS "date", issue_events.issue_id AS "reopenedissues", action AS "action"
         FROM issue_events
         WHERE issue_events.action= "reopened"
+	GROUP BY MONTH(date)
         """)
 
         return pd.read_sql(reOpenedIssuesSQL, self.db, params={"repoid": str(repoid)})
