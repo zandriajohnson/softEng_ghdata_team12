@@ -187,7 +187,7 @@ GHDataReport.prototype.buildReport = function () {
               height: 300,
               color_range: ['#aaa'],
               x_accessor: 'date',
-              y_accessor: 'watchers',
+              y_accessor: 'num_organizations',
               target: '#contributorDiversity-over-time'
       });
     });
