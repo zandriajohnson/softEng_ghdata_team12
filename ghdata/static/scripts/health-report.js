@@ -196,9 +196,8 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.transparency().then(function (transparency) {
 	console.log(transparency);
 	MG.data_graphic({
-        title: "Number of comments per issue.",
-        data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ')
-
+        title: "Number of comments per issue",
+        data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
