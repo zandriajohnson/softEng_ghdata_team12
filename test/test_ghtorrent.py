@@ -51,3 +51,10 @@ def test_issue_response_time(ghtorrent):
 
 def test_pull_acceptance_rate(ghtorrent):
     assert ghtorrent.pull_acceptance_rate(ghtorrent.repoid('akka', 'akka')).isin([0.5]).any
+    
+#START OF NEW CODE - Adam
+def test_bus_factor(ghtorrent):
+    assert ghtorrent.bus_factor(ghtorrent.repoid('hadley', 'devtools'))
+
+def test_bus_factor_fail(ghtorrent):
+    assert ghtorrent.bus_factor(ghtorrent.repoid('hadley', 'devtools'))
