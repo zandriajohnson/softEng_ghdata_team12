@@ -361,43 +361,42 @@ class GHTorrent(object):
         """)
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
-
-    #Jack's Metric for Sprint 2
+    # Jack's Metric for Sprint 2
     def transparency(self, repoid):
-   #     transparencySQL = s.sql.text("""
-   #     SELECT avg(avg_num_comments), project_name
-    #    FROM
-    #    (
-    #    SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id
-    #    FROM issue_comments
-     #   JOIN issues on issue_comments.issue_id = issues.id
-     #   JOIN projects on issues.repo_id = projects.id
-      #  GROUP BY projects.id, issues.id
-      #  ) as comments_per_issue
-      #  GROUP by project_id
-      #  """)
-        return pd.read_sql(transparencySQL, self.db, params ={"repoid": str(repoid)})
+        #     transparencySQL = s.sql.text("""
+        #     SELECT avg(avg_num_comments), project_name
+        #    FROM
+        #    (
+        #    SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id
+        #    FROM issue_comments
+        #   JOIN issues on issue_comments.issue_id = issues.id
+        #   JOIN projects on issues.repo_id = projects.id
+        #  GROUP BY projects.id, issues.id
+        #  ) as comments_per_issue
+        #  GROUP by project_id
+        #  """)
+        return pd.read_sql(transparencySQL, self.db, params={"repoid": str(repoid)})
 
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
-                    
-        SELECT  MONTH(NOW()) as "date", COUNT(*) as bus_factor
-        FROM (
-          SELECT
-            project_id,
-            committer_id,
-            COUNT(committer_id)
-          FROM commits
-          WHERE project_id = :repoid
-          GROUP BY committer_id
-          HAVING COUNT(committer_id) > (
-            SELECT .2 * COUNT(id)
-            FROM commits
-            WHERE project_id = :repoid
-          )
-          ORDER BY COUNT(committer_id) DESC
-        ) as foo;
+         SELECT commits.created_at, COUNT(*) as bus_factor
+            FROM (
+              SELECT
+                project_id,
+                committer_id,
+                COUNT(committer_id)
+              FROM commits
+            
+              GROUP BY committer_id
+              HAVING COUNT(committer_id) > (
+                SELECT .2 * COUNT(id)
+                FROM commits
+                WHERE project_id = :repoid
+              )
+              ORDER BY COUNT(committer_id) DESC
+            ) as foo, commits
+            GROUP BY commits.project_id, MONTH(commits.created_at)
             
         """)
         return pd.read_sql(busFactorSQL, self.db, params={"repoid": str(repoid)})
