@@ -335,16 +335,16 @@ class GHTorrent(object):
         Determines Number of Non-Project Member commits
         """
         contributorBreadthSQL = s.sql.text("""
-	SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
-	from
-	commits
-	join projects on commits.project_id = projects.id
-	join users on users.id = commits.author_id
-	where (projects.id, users.id) not in
-	(select repo_id, user_id from project_members)
-	group by projects.id
-	""")
-        return pd.read_sql(contributerBreadthSQL, self.db, params={"repoid": str(repoid)})
+        SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
+        from
+        commits
+        join projects on commits.project_id = projects.id
+        join users on users.id = commits.author_id
+        where (projects.id, users.id) not in
+        (select repo_id, user_id from project_members)
+        group by projects.id
+        """)
+        return pd.read_sql(contributorBreadthSQL, self.db, params={"repoid": str(repoid)})
 
     # Adam's Metric for SPRINT 2
     def contributor_diversity(self, repoid):
@@ -381,22 +381,23 @@ class GHTorrent(object):
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
-            SELECT COUNT(*) as bus_factor
-            FROM (
-              SELECT
-                project_id,
-                committer_id,
-                COUNT(committer_id)
-              FROM commits
-              WHERE project_id = :repoid
-              GROUP BY committer_id
-              HAVING COUNT(committer_id) > (
-                SELECT .2 * COUNT(id)
-                FROM commits
-                WHERE project_id = :repoid
-              )
-              ORDER BY COUNT(committer_id) DESC
-            ) as foo
+                    
+        SELECT  MONTH(NOW()) as "date", COUNT(*) as bus_factor
+        FROM (
+          SELECT
+            project_id,
+            committer_id,
+            COUNT(committer_id)
+          FROM commits
+          WHERE project_id = :repoid
+          GROUP BY committer_id
+          HAVING COUNT(committer_id) > (
+            SELECT .2 * COUNT(id)
+            FROM commits
+            WHERE project_id = :repoid
+          )
+          ORDER BY COUNT(committer_id) DESC
+        ) as foo;
             
         """)
         return pd.read_sql(busFactorSQL, self.db, params={"repoid": str(repoid)})
