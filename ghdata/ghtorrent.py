@@ -388,7 +388,7 @@ class GHTorrent(object):
                 committer_id,
                 COUNT(committer_id)
               FROM commits
-              WHERE project_id = repoid
+              WHERE project_id = :repoid
               GROUP BY committer_id
               HAVING COUNT(committer_id) > (
                 SELECT .2 * COUNT(id)
