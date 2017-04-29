@@ -380,7 +380,7 @@ class GHTorrent(object):
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
-         SELECT commits.created_at, COUNT(*) as bus_factor
+         SELECT date(commits.created_at) as "date", COUNT(*) as "bus_factor"
             FROM (
               SELECT
                 project_id,
