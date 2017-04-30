@@ -188,7 +188,7 @@ GHDataAPIClient.prototype.reopened_issues = function (params) {
 
 //Jordan's Stuff
 
-GHDataAPIClient.prototype.communityActivity = function (params){
+GHDataAPIClient.prototype.community_activity = function (params){
 	return this.get('timeseries/community_activity', params);
 };
 
