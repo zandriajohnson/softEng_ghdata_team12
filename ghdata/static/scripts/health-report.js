@@ -215,7 +215,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	  MG.data_graphic({
         title: "Bus Factor.",
-        data: MG.convert.date(bus_factor, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        data: bus_factor,
         chart_type: 'point',
         least_squares: true,
         full_width: true,
