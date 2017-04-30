@@ -406,6 +406,7 @@ app.route('/{}/<owner>/<repo>/commits/locations'.format(GHDATA_API_VERSION))(fla
                         }
                     ]
 """
+app.route('/{}/<owner>/<repo>/timeseries/bus_factor'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.bus_factor))
 app.route('/{}/<owner>/<repo>/linking_websites'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(app, publicwww.linking_websites))
 #Jordan's Endpoint
 app.route('/{}/<owner>/<repo>/timeseries/community_activity'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(app, ghtorrent.community_activity))
@@ -416,7 +417,7 @@ app.route('/{}/<owner>/<repo>/timeseries/contributor_diversity'.format(GHDATA_AP
 app.route('/{}/<owner>/<repo>/timeseries/reopened_issues'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.reopened_issues))
 app.route('/{}/<owner>/<repo>/timeseries/dist_work'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.dist_work))
 app.route('/{}/<owner>/<repo>/timeseries/transparency'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.transparency))
-app.route('/{}/<owner>/<repo>/timeseries/bus_factor'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.bus_factor))
+
 
 
 if (DEBUG):
