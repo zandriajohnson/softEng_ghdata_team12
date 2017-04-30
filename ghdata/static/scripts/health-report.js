@@ -140,12 +140,12 @@ GHDataReport.prototype.buildReport = function () {
     
        
 	//Community Activity
-	this.api.communityActivity().then(function (community_activity) {
-      console.log(communityActivity);
+	this.api.community_activity().then(function (community_activity) {
+      
 	  
 	  MG.data_graphic({
         title: "Community Activity/Week",
-        data: MG.convert.date(communityActivity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        data: MG.convert.date(community_activity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
@@ -177,16 +177,16 @@ GHDataReport.prototype.buildReport = function () {
 
 	//Contributor Diversity
 	this.api.contributor_diversity().then(function (contributor_diversity) {
-            console.log(contributor_diversity);
+            
         MG.data_graphic({
         title: "Contributor Diversity",
-              data: MG.convert.date(contributor_diversity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
+              data: contributor_diversity,
               chart_type: 'point',
               least_squares: true,
               full_width: true,
               height: 300,
               color_range: ['#aaa'],
-              x_accessor: 'date',
+              x_accessor: 'project_name',
               y_accessor: 'num_organizations',
               target: '#contributorDiversity-over-time'
       });
