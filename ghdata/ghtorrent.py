@@ -294,12 +294,12 @@ class GHTorrent(object):
     # Zandria's metrics dist_work and reopened_issues
     def dist_work(self, repoid):
         distWorkSQL = s.sql.text("""
-     	SELECT projects.name as "project_name", count(commits.id) as "numcommits", date(commits.created_at) as "date"
+     	SELECT projects.name AS "project_name", count(commits.id) AS "numcommits", date(commits.created_at) AS "date"
         FROM commits
         JOIN project_commits on commits.id = project_commits.project_id
         JOIN projects on projects.id = project_commits.project_id
     	JOIN users on commits.author_id = users.id
-    	GROUP BY MONTH(commits.created_at)
+    	GROUP BY MONTH(commits.created_at), project_name
         """)
 
         return pd.read_sql(distWorkSQL, self.db, params={"repoid": str(repoid)})
@@ -320,12 +320,12 @@ class GHTorrent(object):
         """
 
         communityActivitySQL = s.sql.text("""
-        SELECT project_commits.project_id as project_id, commits.author_id
-        as author_id, count(project_commits.commit_id) as num_commits
+        SELECT project_commits.project_id AS project_id, commits.author_id
+        AS author_id, count(project_commits.commit_id) AS "activity", commits.created_at AS "date"
 	    from commits
         join project_commits on commits.id = project_commits.commit_id
         join projects on projects.id = project_commits.project_id
-        group by project_id, author_id
+        group by YEAR(commits.created_at), project_id, author_id
         """)
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
@@ -349,7 +349,7 @@ class GHTorrent(object):
     # Adam's Metric for SPRINT 2
     def contributor_diversity(self, repoid):
         contributorDiversitySQL = s.sql.text("""
-        SELECT count(distinct org_id) as num_organizations, projects.name as project_name, url
+        SELECT count(distinct org_id) AS "num_organizations", projects.name AS "project_name", url
         From
 	    organization_members
         join users on organization_members.user_id = users.id
@@ -357,7 +357,8 @@ class GHTorrent(object):
         join pull_requests on pull_request_history.pull_request_id = pull_requests.id
         join projects on pull_requests.base_repo_id = projects.id
         where pull_request_history.action = 'opened'
-        group by projects.id
+        GROUP BY projects.id
+	LIMIT 9
         """)
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
