@@ -181,7 +181,7 @@ GHDataReport.prototype.buildReport = function () {
         MG.data_graphic({
         title: "Contributor Diversity",
               data: contributor_diversity,
-              chart_type: 'point',
+              chart_type: 'bar',
               least_squares: true,
               full_width: true,
               height: 300,
@@ -215,7 +215,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	  MG.data_graphic({
         title: "Bus Factor.",
-        data: [{'date': new Date(), 'value': bus_factor}],
+        data: [{'date': new Date(), 'value': "bus_factor"}, {'date':new Date('2014-11-02'),'value':18}],
         chart_type: 'point',
         least_squares: true,
         full_width: true,
