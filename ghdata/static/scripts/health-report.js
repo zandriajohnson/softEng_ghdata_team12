@@ -215,14 +215,14 @@ GHDataReport.prototype.buildReport = function () {
 
 	  MG.data_graphic({
         title: "Bus Factor.",
-        data: [{'date': new Date(), 'value': "bus_factor"}, {'date':new Date('2014-11-02'),'value':18}],
+        data: MG.convert.date(bus_factor, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
         height: 300,
         color_range: ['#aaa'],
         x_accessor: 'date',
-        y_accessor: 'value',
+        y_accessor: 'bus_factor',
         target: '#bus_factor'
       });
     });
