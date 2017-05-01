@@ -33,7 +33,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        
+        color_range: ['blue'],
         x_accessor: 'date',
         y_accessor: 'commits',
         target: '#commits-over-time'
@@ -49,7 +49,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        
+        color_range: ['blue'],
         x_accessor: 'date',
         y_accessor: 'watchers',
         target: '#stargazers-over-time'
@@ -65,7 +65,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        
+        color_range: ['blue'],
         x_accessor: 'date',
         y_accessor: 'projects',
         target: '#forks-over-time'
@@ -81,7 +81,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        
+        color_range: ['blue'],
         x_accessor: 'date',
         y_accessor: 'issues',
         target: '#issues-over-time'
@@ -196,9 +196,9 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        
+        color_range: ['blue'],
         x_accessor: 'date',
-        y_accessor: 'activity',
+        y_accessor: 'avg_comment',
         target: '#Number-of-comments-per-issue'
       });
     });
