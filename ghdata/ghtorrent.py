@@ -335,7 +335,7 @@ class GHTorrent(object):
         Determines Number of Non-Project Member commits
         """
         contributorBreadthSQL = s.sql.text("""
-        SELECT count(commits.id) as num_commits, projects.name as project_name, projects.url as url
+        SELECT count(commits.id) as "num_commits", projects.name as "project_name", projects.url as url
         from
         commits
         join projects on commits.project_id = projects.id
@@ -343,6 +343,7 @@ class GHTorrent(object):
         where (projects.id, users.id) not in
         (select repo_id, user_id from project_members)
         group by projects.id
+	LIMIT 9
         """)
         return pd.read_sql(contributorBreadthSQL, self.db, params={"repoid": str(repoid)})
 
