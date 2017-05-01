@@ -208,7 +208,7 @@ GHDataReport.prototype.buildReport = function () {
 		console.log(bus_factor);
 	  MG.data_graphic({
         title: "Bus Factor",
-        data: [{'date': new Date(), 'value': 'bus_factor'}],
+        data: [{'date': new Date(), 'value': 20}],
         chart_type: 'point',
         least_squares: true,
         full_width: true,
@@ -217,7 +217,7 @@ GHDataReport.prototype.buildReport = function () {
         color_range: ['#aaa'],
         target: '#bus_factor'
       });
-		console.log('value');
+	
     });
 
 
