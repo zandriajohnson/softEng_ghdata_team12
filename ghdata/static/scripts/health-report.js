@@ -190,7 +190,7 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.transparency().then(function (transparency) {
 	console.log(transparency);
 	MG.data_graphic({
-        title: "Avg. Comments/Issue per Project",
+        title: "Transparency",
         data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
