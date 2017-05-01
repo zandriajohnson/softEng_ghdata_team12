@@ -205,6 +205,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	  	//bus_factor
 	this.api.bus_factor().then(function (bus_factor) {
+		console.log(bus_factor);
 	  MG.data_graphic({
         title: "Bus Factor",
         data: [{'date': new Date(), 'value': 'bus_factor'}],
@@ -216,6 +217,7 @@ GHDataReport.prototype.buildReport = function () {
         color_range: ['#aaa'],
         target: '#bus_factor'
       });
+		console.log('value');
     });
 
 
