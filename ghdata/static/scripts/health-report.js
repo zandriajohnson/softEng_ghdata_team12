@@ -206,11 +206,12 @@ GHDataReport.prototype.buildReport = function () {
 	  	//bus_factor
 	this.api.bus_factor().then(function (bus_factor) {
 		console.log(bus_factor);
-		var busFact = parseInt(bus_factor);
-		console.log(busFact);
+		var busFact = bus_factor;
+		console.log(busFact.bus_factor);
+		
 	  MG.data_graphic({
         title: "Bus Factor",
-        data: [{'date': new Date(), 'value': busFact}],
+        data: [{'date': new Date(), 'value': bus_factor}],
         chart_type: 'point',
         least_squares: true,
         full_width: true,
