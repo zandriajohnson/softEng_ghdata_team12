@@ -299,7 +299,6 @@ class GHTorrent(object):
         JOIN project_commits on commits.id = project_commits.project_id
         JOIN projects on projects.id = project_commits.project_id
     	JOIN users on commits.author_id = users.id
-	WHERE projects.id = :repoid
     	GROUP BY MONTH(commits.created_at)
         """)
 
@@ -368,7 +367,7 @@ class GHTorrent(object):
     # Jack's Metric for Sprint 2
     def transparency(self, repoid):
         transparencySQL = s.sql.text("""
-        SELECT avg(avg_num_comments), project_name, created_at
+        SELECT avg(avg_num_comments) AS "avg_comment", project_name, created_at AS "date"
         FROM(
             SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id,  issue_comments.created_at as created_at
             FROM issue_comments
