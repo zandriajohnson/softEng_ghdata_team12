@@ -194,8 +194,8 @@ GHDataAPIClient.prototype.community_activity = function (params){
 
 //#Adam
 
-GHDataAPIClient.prototype.Contributor_Breadth = function (params) {
-  return this.get('timeseries/Contributor_Breadth', params);
+GHDataAPIClient.prototype.contr_bre = function (params) {
+  return this.get('timeseries/contr_bre', params);
 };
 
 GHDataAPIClient.prototype.contributor_diversity = function (params) {
