@@ -65,7 +65,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        color_range: ['blue'],
+        color_range: ['#aaa'],
         x_accessor: 'date',
         y_accessor: 'projects',
         target: '#forks-over-time'
@@ -81,7 +81,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        color_range: ['blue'],
+        color: '#5D59DF',
         x_accessor: 'date',
         y_accessor: 'issues',
         target: '#issues-over-time'
@@ -129,7 +129,6 @@ GHDataReport.prototype.buildReport = function () {
       least_squares: true,
       full_width: true,
       height: 300,
-      
       x_accessor: 'date',
       y_accessor: 'reopenedissues',
       target: '#reopenedissues-over-time'
@@ -145,7 +144,6 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-       
         x_accessor: 'date',
         y_accessor: 'activity',
         target: '#communityActivity-over-time'
@@ -162,7 +160,6 @@ GHDataReport.prototype.buildReport = function () {
 		full_width: true,
 		height: 300,
 		width: 490,
-		
 		x_accessor: 'project_name',
 		y_accessor: 'num_commits',
 		target: '#cont-over-time'
@@ -179,7 +176,6 @@ GHDataReport.prototype.buildReport = function () {
               full_width: true,
               height: 300,
 	      width: 490,
-             
               x_accessor: 'project_name',
               y_accessor: 'num_organizations',
               target: '#contributorDiversity-over-time'
@@ -196,6 +192,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
+	color_range:	['blue', 'gray', 'black'],
         x_accessor: 'created_at',
         y_accessor: 'avg_comments',
         target: '#Number-of-comments-per-issue'
