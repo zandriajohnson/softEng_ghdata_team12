@@ -364,7 +364,7 @@ class GHTorrent(object):
         return pd.read_sql(contributorDiversitySQL, self.db, params={"repoid": str(repoid)})
 
     # Jack's Metric for Sprint 2
-   # def transparency(self, repoid):
+   def transparency(self, repoid):
         #transparencySQL = s.sql.text("""
         #     SELECT avg(avg_num_comments), project_name
         #    FROM
@@ -377,7 +377,7 @@ class GHTorrent(object):
         #  ) as comments_per_issue
         #  GROUP by project_id
         #  """)
-        #return pd.read_sql(transparencySQL, self.db, params={"repoid": str(repoid)})
+        return pd.read_sql(transparencySQL, self.db, params={"repoid": str(repoid)})
 
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
