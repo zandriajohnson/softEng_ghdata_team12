@@ -204,7 +204,7 @@ GHDataReport.prototype.buildReport = function () {
 	  	//bus_factor
 	this.api.bus_factor().then(function (bus_factor) {
 	  MG.data_graphic({
-        title: "Bus Factor.",
+        title: "Bus Factor",
         data: [{'date': new Date(), 'value': 'bus_factor'}],
         chart_type: 'point',
         least_squares: true,
