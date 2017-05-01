@@ -190,15 +190,15 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.transparency().then(function (transparency) {
 	console.log(transparency);
 	MG.data_graphic({
-        title: "Avg. Comments/Issue per Project",
+        title: "Transparency",
         data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
         height: 300,
-        color_range: ['blue'],
+        color_range: ['blue', 'red'],
         x_accessor: 'date',
-        y_accessor: 'avg_comment',
+        y_accessor: 'avg_comments',
         target: '#Number-of-comments-per-issue'
       });
     });

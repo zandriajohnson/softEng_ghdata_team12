@@ -367,16 +367,12 @@ class GHTorrent(object):
     # Jack's Metric for Sprint 2
     def transparency(self, repoid):
         transparencySQL = s.sql.text("""
-        SELECT avg(avg_num_comments) AS "avg_comment", project_name, created_at AS "date"
-        FROM(
-            SELECT count(comment_id) as avg_num_comments, projects.name as project_name, projects.id as project_id,  issue_comments.created_at as created_at
-            FROM issue_comments
-            JOIN issues on issue_comments.issue_id = issues.id
-            JOIN projects on issues.repo_id = projects.id
-	    WHERE issues.repo_id = :repoid
-            GROUP BY projects.id, issues.id
-          ) as comments_per_issue
-          GROUP by project_id
+        SELECT count(comment_id) as "avg_comments", projects.name as project_name, projects.id as project_id,  issue_comments.created_at as "created_at"
+        FROM issue_comments
+        JOIN issues on issue_comments.issue_id = issues.id
+        JOIN projects on issues.repo_id = projects.id
+	WHERE issues.repo_id = :repoid
+        GROUP BY MONTH(issue_comments.created_at ), projects.id, issues.id
         """)
         return pd.read_sql(transparencySQL, self.db, params={"repoid": str(repoid)})
 
