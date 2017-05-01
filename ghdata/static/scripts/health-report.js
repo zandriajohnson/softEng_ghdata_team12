@@ -207,7 +207,11 @@ GHDataReport.prototype.buildReport = function () {
 	this.api.bus_factor().then(function (bus_factor) {
 		console.log(bus_factor);
 		var busFact = bus_factor;
-		console.log(busFact.bus_factor);
+		console.log(busFact[0]);
+		console.log(bus_factor[0]);
+		console.log(bus_factor[0].value);
+		console.log(bus_factor.bus_factor);
+		console.log(Array.bus_factor);
 		
 	  MG.data_graphic({
         title: "Bus Factor",
