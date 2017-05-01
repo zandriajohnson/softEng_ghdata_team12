@@ -105,7 +105,6 @@ GHDataReport.prototype.buildReport = function () {
     });
 	
 	//Our code begins here!!! 
-	//Distribution of Work
 
 	this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
@@ -136,15 +135,11 @@ GHDataReport.prototype.buildReport = function () {
       target: '#reopenedissues-over-time'
     });
   });
-    
-    
        
 	//Community Activity
 	this.api.community_activity().then(function (community_activity) {
-      
-	  
 	  MG.data_graphic({
-        title: "Community Activity/Week",
+        title: "Community Activity/Year",
         data: MG.convert.date(community_activity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
@@ -156,30 +151,27 @@ GHDataReport.prototype.buildReport = function () {
         target: '#communityActivity-over-time'
       });
     });
-
 	
 	// Contributor Breadth
-	this.api.contributorBreadth().then(function (Contributor_Breadth) {
-			console.log(contributorBreadth);
-		MG.data_graphic({
-        title: "Core/Non-Core Contributors",
-			  data: MG.convert.date(contributorBreadth, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
-			  chart_type: 'point',
-			  least_squares: true,
-			  full_width: true,
-			  height: 300,
-			  color_range: ['#aaa'],
-			  x_accessor: 'date',
-			  y_accessor: 'watchers',
-			  target: '#Contributors-over-time'
+	this.api.Contributor_Breadth().then(function (Contributor_Breadth) {
+	MG.data_graphic({
+        	title: "Non-Core Contributors/Project",
+		data: Contributor_Breadth,
+		chart_type: 'bar',
+		least_squares: true,
+		full_width: true,
+		height: 300,
+		color_range: ['#aaa'],
+		x_accessor: 'project_name',
+		y_accessor: 'num_commits',
+		target: '#Contributors-over-time'
 	  });
     });
 
 	//Contributor Diversity
 	this.api.contributor_diversity().then(function (contributor_diversity) {
-            
-        MG.data_graphic({
-        title: "Contributor Diversity",
+		MG.data_graphic({
+              title: "Contributor Diversity",
               data: contributor_diversity,
               chart_type: 'bar',
               least_squares: true,
