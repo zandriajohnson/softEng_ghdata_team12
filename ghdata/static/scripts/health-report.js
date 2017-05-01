@@ -108,7 +108,7 @@ GHDataReport.prototype.buildReport = function () {
 
 	this.api.dist_work().then(function (dist_work) {
 	   MG.data_graphic({
-    	  title: "Distribution Of Work/Month",
+    	  title: "Distribution Of Work/Year",
     	  data: MG.convert.date(dist_work, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
     	  chart_type: 'line',
     	  least_squares: true,
@@ -117,6 +117,8 @@ GHDataReport.prototype.buildReport = function () {
     	  color_range: ['#aaa'],
     	  x_accessor: 'date',
     	  y_accessor: 'numcommits',
+	  x_label: 'YEAR',
+	  y_label: 'COMMITS',
     	  target: '#distribution-over-time'
      });
    });
@@ -132,6 +134,8 @@ GHDataReport.prototype.buildReport = function () {
       color_range: ['#aaa'],
       x_accessor: 'date',
       y_accessor: 'reopenedissues',
+       x_label: 'MONTH',
+       y_label: 'REOPENED ISSUES',
       target: '#reopenedissues-over-time'
     });
   });
@@ -141,13 +145,15 @@ GHDataReport.prototype.buildReport = function () {
 	  MG.data_graphic({
         title: "Community Activity/Year",
         data: MG.convert.date(community_activity, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
-        chart_type: 'point',
+        chart_type: 'line',
         least_squares: true,
         full_width: true,
         height: 300,
         color_range: ['#aaa'],
         x_accessor: 'date',
         y_accessor: 'activity',
+	 x_label: 'YEAR',
+	  y_label: 'ACTIVITY',
         target: '#communityActivity-over-time'
       });
     });
@@ -165,6 +171,8 @@ GHDataReport.prototype.buildReport = function () {
 		color_range: ['#aaa'],
 		x_accessor: 'project_name',
 		y_accessor: 'num_commits',
+		 x_label: 'PROJECT',
+	  y_label: 'COMMITS',
 		target: '#cont-over-time'
 	  });
     });
@@ -182,6 +190,8 @@ GHDataReport.prototype.buildReport = function () {
               color_range: ['#aaa'],
               x_accessor: 'project_name',
               y_accessor: 'num_organizations',
+			 x_label: 'PROJECT',
+	  y_label: 'NUM. ORGANIZATIONS',
               target: '#contributorDiversity-over-time'
       });
     });
@@ -216,6 +226,8 @@ GHDataReport.prototype.buildReport = function () {
         color_range: ['#aaa'],
 	x_accessor: 'date',
         y_accessor: 'value',
+		   x_label: 'DATE',
+	  y_label: 'BUS FACTOR',
         target: '#bus_factor'
       });
     });
