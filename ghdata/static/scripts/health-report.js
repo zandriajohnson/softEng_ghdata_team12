@@ -196,7 +196,7 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        x_accessor: 'date',
+        x_accessor: 'created_at',
         y_accessor: 'avg_comments',
         target: '#Number-of-comments-per-issue'
       });
