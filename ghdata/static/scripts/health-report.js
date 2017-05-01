@@ -206,8 +206,8 @@ GHDataReport.prototype.buildReport = function () {
 	  	//bus_factor
 	this.api.bus_factor().then(function (bus_factor) {
 		console.log(bus_factor);
-		var busFact = bus_factor;
-		console.log(busFact[0].bus_factor);
+		//var busFact = bus_factor;
+		//console.log(busFact[0].bus_factor);
 		console.log(bus_factor[0].bus_factor);
 		//console.log(bus_factor[0].value);
 		//console.log(bus_factor.bus_factor);
@@ -215,7 +215,7 @@ GHDataReport.prototype.buildReport = function () {
 		
 	  MG.data_graphic({
         title: "Bus Factor",
-        data: [{'date': new Date(), 'value': bus_factor[0]}],
+        data: [{'date': new Date(), 'value': bus_factor[0].bus_factor}],
         chart_type: 'point',
         least_squares: true,
         full_width: true,
