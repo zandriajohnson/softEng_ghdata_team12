@@ -411,7 +411,7 @@ app.route('/{}/<owner>/<repo>/linking_websites'.format(GHDATA_API_VERSION))(flas
 #Jordan's Endpoint
 app.route('/{}/<owner>/<repo>/timeseries/community_activity'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.community_activity))
 #Adam
-app.route('/{}/<owner>/<repo>/timeseries/Contributor_Breadth'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.Contributor_Breadth))
+app.route('/{}/<owner>/<repo>/timeseries/contr_bre'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.contr_bre))
 app.route('/{}/<owner>/<repo>/timeseries/contributor_diversity'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.contributor_diversity))
 #Zandria's Endpoint
 app.route('/{}/<owner>/<repo>/timeseries/reopened_issues'.format(GHDATA_API_VERSION))(flaskify_ghtorrent(ghtorrent, ghtorrent.reopened_issues))
