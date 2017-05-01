@@ -25,11 +25,33 @@
 	</script>
   </head>
   <body>
-
+    <!-- Added a horizontal menu bar to the top of the page -->
+    <ul id='menu'>
+        <li class='item'><a href="https://github.com/OSSHealth/ghdata">Original</a></li>
+        <li class='item'><a href="https://github.com/Hackers-To-Engineers/ghdata_sprint1_group12.git">Group 12</a></li>
+        <li class='item'><a href="https://wiki.linuxfoundation.org/oss-health-metrics/start">About</a></li>
+        <li class='item'><a href="http://ghtorrent.org/msr14.html">Data Pool</a></li>
+    </ul>
     <!-- basic form to get the owner and repo. GET causes auto formating into the URL on submit -->
-    <div class="row">
+    <div class="row formParent" style="background:#ddd;">
       <!-- Select from this list of repos http://ghtorrent.org/msr14.html -->
-	  <select onChange="changeRepo(this)" id="list">
+	    <div class='child1'>
+            <form id="repoForm" name="input" method="GET">
+                <div class="form-group">
+                    <label for="owner">Owner</label>
+                    <input type="text" class="form-control" name="owner" id="owner">
+                </div>
+                <div class="form-group">
+                    <label for="repo">Repository</label>
+                    <input type="text" class="form-control" name="repo" id="repo">
+                </div>
+                <button type="submit" class="" style="background:white">Submit</button>
+                         
+            </form>
+      </div>
+        
+      <div class='child2'>
+        <select onChange="changeRepo(this)" id="list">
 		<option value="">Select Repo Name</option>
 		<option value="akka">akka</option>
 		<option value="hadley">devtools</option>
@@ -121,25 +143,17 @@
 		<option value="scala">scala</option>
 		<option value="scalatra">scalatra</option>
 		<option value="twitter">zipkin</option>
-	
-	
-	
 	  </select>
-	  
-	  <form id="repoForm" name="input" method="GET" style="background:#ddd; padding:30px">
-        <div class="form-group">
-          <label for="owner">Owner</label>
-          <input type="text" class="form-control" name="owner" id="owner">
-        </div>
-        <div class="form-group">
-          <label for="repo">Repository</label>
-          <input type="text" class="form-control" name="repo" id="repo">
-        </div>
-        <button type="submit" class="" style="background:white">Submit</button>
-        <br><small>Currently only repositories in the <a href="http://ghtorrent.org/msr14.html">MSR14 dataset</a> are supported. The projects on that site are listed as &lt;repo&gt;/&lt;owner&gt;<br>(for instance, devtoos/hadley would is the project devtools by the owner hadley)</small>
-        </form>
+      </div>
     </div>
-
+    <div id='smallText'>
+      <br><small>Currently only repositories in the <a href="http://ghtorrent.org/msr14.html">MSR14 dataset</a> are supported. The projects on that site are listed as &lt;repo&gt;/&lt;owner&gt;<br>(for instance, devtoos/hadley would is the project devtools by the owner hadley)</small> 
+    </div>
+    
+    <!-- Added a wrapper div to hold a transparent background image -->
+    
+    <div id="backgroundLogo">
+    
     <div class="container">	  
 	  <div class="row report">
         <section>
@@ -178,6 +192,7 @@
         </div> <!-- end of report -->
 
       </div> <!-- end of container -->
+    </div>
       <script src="scripts/health-report.js"></script>
     </body>
   </html>

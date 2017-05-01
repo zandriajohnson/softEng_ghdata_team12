@@ -21,6 +21,62 @@ body {
   margin: 0;
 }
 
+/* Added for sprint 3 */
+
+.child1{
+    float: left;
+    overflow:hidden;
+    padding: 25px 50px 0px 100px;
+}
+
+.child2{
+    float: right;
+    overflow:hidden;
+    padding: 100px 400px 0px 100px;
+}
+
+.formParent{
+    display: inline-block;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+}
+
+#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.item {
+    float: left;
+}
+
+.item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.item a:hover {
+    background-color: #111;
+}
+
+#smallText{
+    background: #ddd;
+    margin-top: -10px;
+    padding-left: 100px;
+}
+
+#backgroundLogo{
+    background:url(http://ec2-34-205-135-34.compute-1.amazonaws.com:5000/logo.png);
+}
+
+
 /* HTML5 display definitions
    ========================================================================== */
 
