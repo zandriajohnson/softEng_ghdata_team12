@@ -321,7 +321,7 @@ class GHTorrent(object):
 
         communityActivitySQL = s.sql.text("""
         SELECT project_commits.project_id AS project_id, commits.author_id
-        AS author_id, count(project_commits.commit_id) AS "activity", commits.created_at AS "date"
+        AS author_id, count(project_commits.commit_id) AS "activity", date(commits.created_at) AS "date"
 	    from commits
         join project_commits on commits.id = project_commits.commit_id
         join projects on projects.id = project_commits.project_id
@@ -382,23 +382,22 @@ class GHTorrent(object):
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
-         SELECT date(commits.created_at) as "date", COUNT(*) as "bus_factor"
-            FROM (
-              SELECT
-                project_id,
-                committer_id,
-                COUNT(committer_id)
-              FROM commits
-            
-              GROUP BY committer_id
-              HAVING COUNT(committer_id) > (
-                SELECT .2 * COUNT(id)
-                FROM commits
-                WHERE project_id = :repoid
-              )
-              ORDER BY COUNT(committer_id) DESC
-            ) as foo, commits
-            GROUP BY commits.project_id, MONTH(commits.created_at)
+	SELECT COUNT(*) as "bus_factor"
+	FROM (
+		SELECT
+		project_id,
+		committer_id,
+		COUNT(committer_id)
+		FROM commits
+		WHERE project_id = :repoid
+		GROUP BY committer_id
+		HAVING COUNT(committer_id) > (
+		SELECT .2 * COUNT(id)
+		FROM commits
+		WHERE project_id = :repoid
+		)
+	ORDER BY COUNT(committer_id) DESC
+	) as foo
             
         """)
         return pd.read_sql(busFactorSQL, self.db, params={"repoid": str(repoid)})
