@@ -72,8 +72,8 @@ body {
     padding-left: 100px;
 }
 
-#backgroundLogo{
-    background: url("http://ec2-34-205-135-34.compute-1.amazonaws.com:5000/logo.png");
+#backgroundLogo {
+    background-image: url("../logo.png");
 }
 
 
@@ -462,7 +462,7 @@ textarea {
  * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
  */
 
-optgroup {
+optgroup { 
   font-weight: bold;
 }
 
