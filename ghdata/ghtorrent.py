@@ -335,7 +335,7 @@ class GHTorrent(object):
         Determines Number of Non-Project Member commits
         """
         contributorBreadthSQL = s.sql.text("""
-        SELECT count(commits.id) as "num_commits", projects.name as "project_name", projects.url as url
+        SELECT count(commits.id) AS "num_commits", projects.name AS "project_name"
         from
         commits
         join projects on commits.project_id = projects.id
@@ -382,7 +382,7 @@ class GHTorrent(object):
     # Alex' metric for sprint 3
     def bus_factor(self, repoid):
         busFactorSQL = s.sql.text("""
-	    SELECT COUNT(*) as "bus_factor"
+	    SELECT COUNT(*) AS "bus_factor"
 	    FROM (
 		    SELECT
 		    project_id,
