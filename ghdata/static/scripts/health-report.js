@@ -203,18 +203,14 @@ GHDataReport.prototype.buildReport = function () {
 
 	  	//bus_factor
 	this.api.bus_factor().then(function (bus_factor) {
-      console.log(bus_factor);
-
 	  MG.data_graphic({
         title: "Bus Factor.",
-        data: bus_factor,
+        data: [{'date': new Date(), 'value': 'bus_factor'}],
         chart_type: 'point',
         least_squares: true,
         full_width: true,
         height: 300,
         color_range: ['#aaa'],
-        x_accessor: 'date',
-        y_accessor: 'bus_factor',
         target: '#bus_factor'
       });
     });
