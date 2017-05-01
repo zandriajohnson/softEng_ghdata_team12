@@ -73,7 +73,7 @@ body {
 }
 
 #backgroundLogo{
-    background: url("../logo.png");
+    background: url("http://ec2-34-205-135-34.compute-1.amazonaws.com:5000/logo.png");
 }
 
 
