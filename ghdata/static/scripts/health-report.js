@@ -211,6 +211,8 @@ GHDataReport.prototype.buildReport = function () {
         full_width: true,
         height: 300,
         color_range: ['#aaa'],
+	x_accessor: 'date',
+        y_accessor: 'bus_factor',
         target: '#bus_factor'
       });
     });
