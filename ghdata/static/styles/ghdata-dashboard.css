@@ -19,8 +19,7 @@ html {
 
 body {
   margin: 0;
-  background-image: url("logo.png");
-   background-image: url("../logo.png");
+ 
 }
 
 /* Added for sprint 3 */
@@ -75,7 +74,7 @@ body {
 }
 
 #backgroundLogo {
-    background-image: url("../logo.png");
+    background-image: url("logo.png");
 }
 
 
