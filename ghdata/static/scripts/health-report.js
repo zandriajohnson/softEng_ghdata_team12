@@ -177,6 +177,7 @@ GHDataReport.prototype.buildReport = function () {
               least_squares: true,
               full_width: true,
               height: 300,
+	      width: 600,
               color_range: ['#aaa'],
               x_accessor: 'project_name',
               y_accessor: 'num_organizations',
@@ -210,9 +211,10 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
+	width: 600,
         color_range: ['#aaa'],
 	x_accessor: 'date',
-        y_accessor: 'bus_factor',
+        y_accessor: 'value',
         target: '#bus_factor'
       });
     });
