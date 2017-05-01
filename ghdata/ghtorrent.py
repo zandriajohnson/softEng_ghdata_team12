@@ -372,7 +372,7 @@ class GHTorrent(object):
         JOIN issues on issue_comments.issue_id = issues.id
         JOIN projects on issues.repo_id = projects.id
 	WHERE issues.repo_id = :repoid
-        GROUP BY projects.id, issues.id
+        GROUP BY MONTH(issue_comments.created_at ), projects.id, issues.id
         """)
         return pd.read_sql(transparencySQL, self.db, params={"repoid": str(repoid)})
 
