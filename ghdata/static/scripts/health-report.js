@@ -187,13 +187,12 @@ GHDataReport.prototype.buildReport = function () {
 	console.log(transparency);
 	MG.data_graphic({
         title: "Transparency",
-        data: MG.convert.date(transparency, 'created_at', '%Y-%m-%dT%H:%M:%S.%LZ'),
+        data: MG.convert.date(transparency, 'date', '%Y-%m-%dT%H:%M:%S.%LZ'),
         chart_type: 'point',
         least_squares: true,
         full_width: true,
         height: 300,
-	color_range:	['blue', 'gray', 'black'],
-        x_accessor: 'created_at',
+        x_accessor: 'date',
         y_accessor: 'avg_comments',
         target: '#Number-of-comments-per-issue'
       });
