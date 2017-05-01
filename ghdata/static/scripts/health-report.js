@@ -153,10 +153,10 @@ GHDataReport.prototype.buildReport = function () {
     });
 	
 	// Contributor Breadth
-	this.api.Contributor_Breadth().then(function (Contributor_Breadth) {
+	this.api.contr_bre().then(function (contr_bre) {
 	MG.data_graphic({
         	title: "Non-Core Contributors/Project",
-		data: Contributor_Breadth,
+		data: contr_bre,
 		chart_type: 'bar',
 		least_squares: true,
 		full_width: true,
@@ -165,7 +165,7 @@ GHDataReport.prototype.buildReport = function () {
 		color_range: ['#aaa'],
 		x_accessor: 'project_name',
 		y_accessor: 'num_commits',
-		target: '#Contributors-over-time'
+		target: '#cont-over-time'
 	  });
     });
 
