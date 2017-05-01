@@ -330,7 +330,7 @@ class GHTorrent(object):
 
         return pd.read_sql(communityActivitySQL, self.db, params={"repoid": str(repoid)})
 
-    def Contributor_Breadth(self, repoid):
+    def contr_bre(self, repoid):
         """
         Determines Number of Non-Project Member commits
         """
