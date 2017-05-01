@@ -196,7 +196,6 @@ GHDataReport.prototype.buildReport = function () {
         least_squares: true,
         full_width: true,
         height: 300,
-        color_range: ['blue', 'red'],
         x_accessor: 'date',
         y_accessor: 'avg_comments',
         target: '#Number-of-comments-per-issue'
