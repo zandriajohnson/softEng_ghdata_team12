@@ -72,8 +72,8 @@ body {
 }
 
 #smallText{
-    background: #333;
-   color:white;
+    
+   text-align: center;
     margin-top: -10px;
     padding-left: 100px;
 }
