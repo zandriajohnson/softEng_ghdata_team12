@@ -36,7 +36,7 @@
         <li class='item'><a href="http://ghtorrent.org/msr14.html">Data Pool</a></li>
     </ul>
     <!-- basic form to get the owner and repo. GET causes auto formating into the URL on submit -->
-    <div class="row formParent">
+    <div class="row formParent" id="backgroundLogo">
       <!-- Select from this list of repos http://ghtorrent.org/msr14.html -->
 	    <div class='child1'>
             <form id="repoForm" name="input" method="GET">
@@ -48,7 +48,7 @@
                     <label for="repo">Repository</label>
                     <input type="text" class="form-control" name="repo" id="repo">
                 </div>
-                <button type="submit" class="" style="background:rgba(77, 77, 255, 0.5)">Submit</button>
+                <button type="submit" id="submitbutton" class="" style="background:rgba(77, 77, 255, 0.5)">Submit</button>
                          
             </form>
             </div>
