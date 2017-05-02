@@ -40,7 +40,7 @@ body {
 }
 
 .formParent{
-   color:white;
+   
     display: inline-block;
     margin-bottom: 0px;
     padding-bottom: 0px;
@@ -335,6 +335,7 @@ textarea {
 
 button {
   overflow: visible;
+   color:white;
 }
 
 /**
@@ -1330,7 +1331,7 @@ there.
   text-align: center;
   border-radius: 5px;
   color: #fff;
-  background-color: #777;
+  background-color: rgba(77, 77, 255, 0.5);
 }
 
 .badge.healthy {
