@@ -77,7 +77,7 @@ body {
 }
 
 #backgroundLogo {
-background-repeat: no-repeat;
+
     background-image: url("logo.png");
     background-attachment: scroll;
     background-position: center;
