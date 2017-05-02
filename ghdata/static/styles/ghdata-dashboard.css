@@ -81,10 +81,13 @@ body {
 #backgroundLogo {
 
     background-image: url("logo.png");
-    background-attachment: scroll;
     background-position: center;
-   background-size: contain;
+    background-size: contain;
     
+}
+
+#submitbutton{
+   color:white;
 }
 
 /* HTML5 display definitions
@@ -1331,7 +1334,7 @@ there.
 }
 
 .badge.healthy {
-  background-color: #595;
+  background-color: rgba(77, 77, 255, 0.5);
 }
 
 .report section {
