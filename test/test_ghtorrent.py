@@ -51,10 +51,13 @@ def test_issue_response_time(ghtorrent):
 
 def test_pull_acceptance_rate(ghtorrent):
     assert ghtorrent.pull_acceptance_rate(ghtorrent.repoid('akka', 'akka')).isin([0.5]).any
-    
-#START OF NEW CODE - Adam
-def test_bus_factor(ghtorrent):
-    assert ghtorrent.bus_factor(ghtorrent.repoid('hadley', 'devtools'))
 
-def test_bus_factor_fail(ghtorrent):
-    assert ghtorrent.bus_factor(ghtorrent.repoid('hadley', 'devtools'))
+def test_dist_work(ghtorrent):
+    assert ghtorrent.dist_work(ghtorrent.repoid('hadley', 'devtools')).isin(["2013-01-21"]).any
+
+def test_reopened_issues(ghtorrent):
+    assert ghtorrent.reopened_issues(ghtorrent.repoid('hadley', 'devtools')).isin(["4233"]).any
+    #START OF NEW CODE - Adam
+def test_bus_factor(ghtorrent):
+    assert ghtorrent.bus_factor(ghtorrent.repoid('hadley', 'devtools')) is not None
+
