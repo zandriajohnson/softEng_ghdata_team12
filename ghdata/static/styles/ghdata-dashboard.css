@@ -36,7 +36,7 @@ body {
 .child2{
     float: right;
     overflow:hidden;
-    padding: 100px 350px 0px 100px;
+    padding: 100px 150px 0px 100px;
 }
 
 .formParent{
