@@ -79,15 +79,10 @@ body {
 #backgroundLogo {
 
     background-image: url("logo.png");
-    
     background-attachment: scroll;
     background-position: center; 
     
 }
-
-#testdiv{
-  background
-
 
 /* HTML5 display definitions
    ========================================================================== */
