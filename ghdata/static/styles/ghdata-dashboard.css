@@ -30,7 +30,7 @@ body {
 .child1{
     float: left;
     overflow:hidden;
-    padding: 25px 50px 0px 200px;
+    padding: 25px 50px 0px 150px;
 }
 
 .child2{
@@ -80,7 +80,8 @@ body {
 
     background-image: url("logo.png");
     background-attachment: scroll;
-    background-position: center; 
+    background-position: center;
+   background-size: contain;
     
 }
 
