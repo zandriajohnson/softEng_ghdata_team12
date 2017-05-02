@@ -7,12 +7,13 @@
  *    user zoom.
  */
 
-/*
+
 html {
-  font-family: sans-serif; /* 1 
-  -ms-text-size-adjust: 100%; /* 2 
-  -webkit-text-size-adjust: 100%; /* 2 
-} */
+   font-family: 'Playfair Display', serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  color:white;
+} 
 
 /**
  * Remove default margin.
@@ -21,6 +22,7 @@ html {
 body {
   margin: 0;
   font-family: 'Playfair Display', serif;
+  color:white;
 }
 
 /* Added for sprint 3 */
@@ -28,7 +30,7 @@ body {
 .child1{
     float: left;
     overflow:hidden;
-    padding: 25px 50px 0px 400px;
+    padding: 25px 50px 0px 300px;
 }
 
 .child2{
@@ -75,12 +77,16 @@ body {
 }
 
 #backgroundLogo {
+    background-color: #666666;
     background-image: url("logo.png");
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-position: center; 
-    background-size: contain;
+    background-size: cover;
 }
+
+#testdiv{
+  background
 
 
 /* HTML5 display definitions
