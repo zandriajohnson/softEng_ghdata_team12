@@ -36,7 +36,7 @@
         <li class='item'><a href="http://ghtorrent.org/msr14.html">Data Pool</a></li>
     </ul>
     <!-- basic form to get the owner and repo. GET causes auto formating into the URL on submit -->
-    <div class="row formParent" style="background:#ddd;">
+    <div class="row formParent" id="backgroundLogo">
       <!-- Select from this list of repos http://ghtorrent.org/msr14.html -->
 	    <div class='child1'>
             <form id="repoForm" name="input" method="GET">
@@ -51,7 +51,7 @@
                 <button type="submit" class="" style="background:white">Submit</button>
                          
             </form>
-      </div>
+            </div>
         
       <div class='child2'>
         <select onChange="changeRepo(this)" id="list">
@@ -155,7 +155,7 @@
     
     <!-- Added a wrapper div to hold a transparent background image -->
     
-    <div id="backgroundLogo">
+    
     
     <div class="container">	  
 	  <div class="row report">
@@ -199,7 +199,7 @@
         </div> <!-- end of report -->
 
       </div> <!-- end of container -->
-    </div>
+   
       <script src="scripts/health-report.js"></script>
     </body>
   </html>
